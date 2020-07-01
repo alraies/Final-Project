@@ -11,6 +11,7 @@ using p00.Models;
 
 namespace p00.Controllers
 {
+    [Authorize(Roles ="استاذ")]
     public class TeachersController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -123,6 +124,42 @@ namespace p00.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public ActionResult listVacation()
+        {
+            return View(db.Teachers.ToList());
+        }
+        public ActionResult Activatethevacation(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Teacher teacher = db.Teachers.Find(id);
+            if (teacher == null)
+            {
+                return HttpNotFound();
+            }
+            teacher.Vacation = true;
+            db.Entry(teacher).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("listVacation");
+        }
+        public ActionResult Cancellationofleave(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Teacher teacher = db.Teachers.Find(id);
+            if (teacher == null)
+            {
+                return HttpNotFound();
+            }
+            teacher.Vacation = false;
+            db.Entry(teacher).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("listVacation");
         }
     }
 }

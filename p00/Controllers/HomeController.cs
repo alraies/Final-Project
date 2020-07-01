@@ -10,10 +10,11 @@ using System.Web.Mvc;
 using WebApplication2.Models;
 using Microsoft.AspNet.Identity;
 using System.Reflection;
+using System.Web.Helpers;
 
 namespace WebApplication2.Controllers
 {
-   
+  
         public class HomeController : Controller
         {
             private ApplicationDbContext db = new ApplicationDbContext();
@@ -23,8 +24,14 @@ namespace WebApplication2.Controllers
             return View(topicEVs.ToList());
            
             }
+            public ActionResult TopicView()
+            {
+            var topicEVs = db.TopicEVs.Include(t => t.Document).Include(t => t.EvaluationForm).Include(t => t.Sections).Include(t => t.Teacher).Include(t => t.Topics);
+            return View(topicEVs.ToList());
 
-            public ActionResult About()
+            }
+
+        public ActionResult About()
             {
                 ViewBag.Message = "Your application description page.";
 
@@ -37,8 +44,9 @@ namespace WebApplication2.Controllers
 
                 return View();
             }
-            // GET: Document/Create
-            public ActionResult Create()
+        // GET: Document/Create
+        
+        public ActionResult Create()
             {
                 return View();
             }
@@ -107,6 +115,7 @@ namespace WebApplication2.Controllers
             
                 if (ModelState.IsValid)
                 {
+                var topic = db.Topics.Find(topicEV.TopicsId);
                 if (submitButton == "موافقه")
                 { 
                     topicEV.Approved = true;
@@ -115,18 +124,57 @@ namespace WebApplication2.Controllers
                     var CurrentTeacher = db.UserToTeachers.Where(a => a.UserID == UserID).SingleOrDefault();
                     var teacher = db.Teachers.Find(CurrentTeacher.TeacherID);
                     var topics = db.Topics.Find(topicEV.TopicsId);
-                    var document = db.Documents.Find(topicEV.Id);
+                    var document = db.Documents.Where(a=>a.TopicEVId==topicEV.Id);
                     topicEV.Nameproved = teacher.FullName;
+                    var Currentcommit = db.CommHeeMembers.Where(a => a.Teacherid == CurrentTeacher.TeacherID).SingleOrDefault();
+                    var Currentcommit2 = db.CommHees.Where(a => a.id == Currentcommit.CommHeeid).SingleOrDefault();
+                    var Currentcommit3 = db.CommitHees.Where(a => a.id == Currentcommit2.CommitHeesid).SingleOrDefault();
                     if (document!= null)
                     {
-                        topicEV.Points = (topicEV.Points + topics.DocPoints);
+                        topicEV.Points = (document.Count()*topics.DocPoints);
                     }
                     if (topicEV.Points > topics.TotalPoints)
                         topicEV.Points = topics.TotalPoints;
-
-                    //top = null;
+                    WebMail.SmtpServer="smtp.gmail.com";
+                    WebMail.SmtpPort = 587;
+                    WebMail.SmtpUseDefaultCredentials = true;
+                    WebMail.EnableSsl = true;
+                    WebMail.UserName="UOB.cs.com@gmail.com";
+                    WebMail.Password = "UOB.cs.com";
+                    db.Notifications.Add(new Notification { RecipientID = topicEV.TeacherId, AccountontID = teacher.Id, Messagee = "تم الموافقه على فقرة " + topic.TopicName, AddedOn = DateTime.Now });
                     db.Entry(topicEV).State = EntityState.Modified;
                     db.SaveChanges();
+                    var CurrentTeacher2 = db.UserToTeachers.Where(a => a.TeacherID==topicEV.TeacherId).SingleOrDefault();
+                    string s = " تمت الموافقه عل فقرت "+topicEV.Topics.TopicName+" \n من قبل "+Currentcommit3.comitname+"";
+                    WebMail.Send(to:CurrentTeacher2.User.Email,subject:"تقييم الاساتذه",body:s,isBodyHtml:true);
+                    //top = null;
+                   
+                    return RedirectToAction("Assent");
+                }
+                else
+                {
+                    var UserID = User.Identity.GetUserId();
+                    var CurrentUser = db.Users.Where(a => a.Id == UserID).SingleOrDefault();
+                    var CurrentTeacher = db.UserToTeachers.Where(a => a.UserID == UserID).SingleOrDefault();
+                    var teacher = db.Teachers.Find(CurrentTeacher.TeacherID);
+                    var Currentcommit = db.CommHeeMembers.Where(a => a.Teacherid == CurrentTeacher.TeacherID).SingleOrDefault();
+                    var Currentcommit2 = db.CommHees.Where(a => a.id == Currentcommit.CommHeeid).SingleOrDefault();
+                    var Currentcommit3 = db.CommitHees.Where(a => a.id == Currentcommit2.CommitHeesid).SingleOrDefault();
+                    topicEV.Nameproved = teacher.FullName;
+                    topicEV.Approved = true;
+                    topicEV.Points = 0;
+                    db.Notifications.Add(new Notification { RecipientID = topicEV.TeacherId, AccountontID = teacher.Id, Messagee = "تم رفض فقرة "+ topic.TopicName, AddedOn = DateTime.Now });
+                    db.Entry(topicEV).State = EntityState.Modified;
+                    db.SaveChanges();
+                    WebMail.SmtpServer = "smtp.gmail.com";
+                    WebMail.SmtpPort = 587;
+                    WebMail.SmtpUseDefaultCredentials = true;
+                    WebMail.EnableSsl = true;
+                    WebMail.UserName = "UOB.cs.com@gmail.com";
+                    WebMail.Password = "UOB.cs.com";
+                    var CurrentTeacher2 = db.UserToTeachers.Where(a => a.TeacherID == topicEV.TeacherId).SingleOrDefault();
+                    string s = " تم ارفض فقرت " + topicEV.Topics.TopicName + " من قبل " + Currentcommit3.comitname + " وفي حالة الارفض الفقره تعطي درجة صفر ذا هناك اعتراض يرجاء مرجعة الموقع";
+                    WebMail.Send(to: CurrentTeacher2.User.Email, subject: "تقييم الاساتذه", body: s, isBodyHtml: true);
                     return RedirectToAction("Assent");
                 }
                 }
@@ -137,11 +185,13 @@ namespace WebApplication2.Controllers
                 ViewBag.TopicsId = new SelectList(db.Topics, "Id", "TopicName", topicEV.TopicsId);
                 return View(topicEV);
             }
+       
         public ActionResult DegreeOfAssessment()
         {
             var topicEVs = db.TopicEVs.Include(t => t.Document).Include(t => t.EvaluationForm).Include(t => t.Sections).Include(t => t.Teacher).Include(t => t.Topics);
             return View(topicEVs.ToList());
         }
+        
         public ActionResult EditProfileTeachers()
         {
             var UserID = User.Identity.GetUserId();
@@ -155,6 +205,7 @@ namespace WebApplication2.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+       
         [ValidateAntiForgeryToken]
         public ActionResult EditProfileTeachers([Bind(Include = "Id,FullName,University,College,Department,Certificate,C_Date,C_Doner,GeneralSpecialization,Specialization,ScientificTitle,ST_Date,ST_Doner,Email,Phone")] Teacher teacher)
         {
@@ -168,6 +219,7 @@ namespace WebApplication2.Controllers
         }
 
         // GET: Teachers/Create
+       
         public ActionResult CreateProfileTeachers()
         {
             return View();
@@ -192,7 +244,7 @@ namespace WebApplication2.Controllers
 
             return View(teacher);
         }
-
+        [Authorize(Roles = "لجنة,Admins")]
         public ActionResult TeachersLists()
         {
             return View(db.Teachers.ToList());
@@ -257,6 +309,49 @@ namespace WebApplication2.Controllers
 
         }
 
+        public ActionResult RefuseTheDocument()
+        {
+            var topicEVs = db.TopicEVs.Include(t => t.Document).Include(t => t.EvaluationForm).Include(t => t.Sections).Include(t => t.Teacher).Include(t => t.Topics);
+            return View(topicEVs.ToList());
+        }
+
+         public ActionResult RefuseTheDocument2(int? id)
+        {
+
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            TopicEV topicEV = db.TopicEVs.Find(id);
+                topicEV.Approved = false;
+                db.Entry(topicEV).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("RefuseTheDocument");
+        }
+        public ActionResult NotificationView()
+        {
+            var UserID = User.Identity.GetUserId();
+            var CurrentUser = db.Users.Where(a => a.Id == UserID).SingleOrDefault();
+            var CurrentTeacher = db.UserToTeachers.Where(a => a.UserID == UserID).SingleOrDefault();
+            var notification = db.Notifications.Where(a => a.RecipientID == CurrentTeacher.TeacherID).ToList();
+            return View(notification);
+        }
+       
+        public ActionResult NotificationView2()
+        {
+            var UserID = User.Identity.GetUserId();
+            var CurrentUser = db.Users.Where(a => a.Id == UserID).SingleOrDefault();
+            var CurrentTeacher = db.UserToTeachers.Where(a => a.UserID == UserID).SingleOrDefault();
+            var notification = db.Notifications.Where(a => a.RecipientID == CurrentTeacher.TeacherID&&a.issee==false);
+            foreach(var itme in notification)
+            {
+                itme.issee = true;
+                db.Entry(itme).State = EntityState.Modified;
+            }
+            db.SaveChanges();
+            return RedirectToAction("NotificationView");
+        }
 
     }
 }

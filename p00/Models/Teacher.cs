@@ -23,6 +23,7 @@ namespace p00.Models
         [Display(Name = "الشهادة الحاصل عليها")]
         public string Certificate { get; set; }
         [Display(Name = "تاريخ الحصول عليها")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MMM/yyyy}")]
         public DateTime C_Date { get; set; }
         [Display(Name = "الجهة المانحة")]
         public string C_Doner { get; set; }
@@ -41,7 +42,8 @@ namespace p00.Models
         public string Email { get; set; }
         [Display(Name = "رقم الهاتف")]
         public string Phone { get; set; }
-
+        [Display(Name = "الاجازه")]
+        public bool Vacation { get; set; }
         public ICollection<CommHeeMembers> CommHeeMembers { get; set; }
         public virtual  ICollection<TopicEV> TopicEVs { get; set; }
     }
