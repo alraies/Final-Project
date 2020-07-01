@@ -1,24 +1,32 @@
 ﻿@model p00.Models.Teacher
 
 @{
-    ViewBag.Title = "EditProfileTeachers";
+    ViewBag.Title = "تعديل معلومات الاستاذ";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<h2>EditProfileTeachers</h2>
+
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Teacher</h4>
+
+<div style=" margin: 0 auto; /* Added */
+        float: none; /* Added */
+        margin-bottom: 10px; /* Added */" class="col-10 card card-primary col-xs-10  ">
+    <div class="card-header">
+        <h3 class="card-title float-lg-none">@ViewBag.Title</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form role="form">
+
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
-        <div class="form-group">
+        <div class="form-group ">
             @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
@@ -26,7 +34,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group ">
             @Html.LabelFor(model => model.University, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.University, new { htmlAttributes = new { @class = "form-control" } })
@@ -34,7 +42,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group ">
             @Html.LabelFor(model => model.College, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.College, new { htmlAttributes = new { @class = "form-control" } })
@@ -42,7 +50,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group ">
             @Html.LabelFor(model => model.Department, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Department, new { htmlAttributes = new { @class = "form-control" } })
@@ -50,7 +58,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group ">
             @Html.LabelFor(model => model.Certificate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Certificate, new { htmlAttributes = new { @class = "form-control" } })
@@ -58,7 +66,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group ">
             @Html.LabelFor(model => model.C_Date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.C_Date, new { htmlAttributes = new { @class = "form-control" } })
@@ -66,7 +74,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group ">
             @Html.LabelFor(model => model.C_Doner, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.C_Doner, new { htmlAttributes = new { @class = "form-control" } })
@@ -74,7 +82,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group ">
             @Html.LabelFor(model => model.GeneralSpecialization, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.GeneralSpecialization, new { htmlAttributes = new { @class = "form-control" } })
@@ -82,7 +90,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group ">
             @Html.LabelFor(model => model.Specialization, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Specialization, new { htmlAttributes = new { @class = "form-control" } })
@@ -90,7 +98,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group ">
             @Html.LabelFor(model => model.ScientificTitle, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ScientificTitle, new { htmlAttributes = new { @class = "form-control" } })
@@ -98,7 +106,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group ">
             @Html.LabelFor(model => model.ST_Date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ST_Date, new { htmlAttributes = new { @class = "form-control" } })
@@ -106,7 +114,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group ">
             @Html.LabelFor(model => model.ST_Doner, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ST_Doner, new { htmlAttributes = new { @class = "form-control" } })
@@ -114,7 +122,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group ">
             @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
@@ -122,7 +130,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group ">
             @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
@@ -132,10 +140,11 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input  type="submit" value="Save" class="btn btn-primary float-left" />
             </div>
         </div>
-    </div>
+        </form>
+</div>
 }
 
 <div>
@@ -143,5 +152,5 @@
 </div>
 
 @*@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}*@
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@

@@ -20,8 +20,8 @@ namespace WebApplication2.Controllers
             private ApplicationDbContext db = new ApplicationDbContext();
             public ActionResult Index()
             {
-            var topicEVs = db.TopicEVs.Include(t => t.Document).Include(t => t.EvaluationForm).Include(t => t.Sections).Include(t => t.Teacher).Include(t => t.Topics);
-            return View(topicEVs.ToList());
+          
+            return View();
            
             }
             public ActionResult TopicView()
