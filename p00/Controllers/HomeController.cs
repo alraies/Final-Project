@@ -141,11 +141,12 @@ namespace WebApplication2.Controllers
                     WebMail.EnableSsl = true;
                     WebMail.UserName="UOB.cs.com@gmail.com";
                     WebMail.Password = "UOB.cs.com";
-                    db.Notifications.Add(new Notification { RecipientID = topicEV.TeacherId, AccountontID = teacher.Id, Messagee = "تم الموافقه على فقرة " + topic.TopicName, AddedOn = DateTime.Now });
+                    string s = " تمت الموافقه عل فقرت " + topicEV.Topics.TopicName + " \n من قبل " + Currentcommit3.comitname + "";
+                    db.Notifications.Add(new Notification { RecipientID = topicEV.TeacherId, AccountontID = teacher.Id, Messagee = s, AddedOn = DateTime.Now });
                     db.Entry(topicEV).State = EntityState.Modified;
                     db.SaveChanges();
                     var CurrentTeacher2 = db.UserToTeachers.Where(a => a.TeacherID==topicEV.TeacherId).SingleOrDefault();
-                    string s = " تمت الموافقه عل فقرت "+topicEV.Topics.TopicName+" \n من قبل "+Currentcommit3.comitname+"";
+                   
                     WebMail.Send(to:CurrentTeacher2.User.Email,subject:"تقييم الاساتذه",body:s,isBodyHtml:true);
                     //top = null;
                    
@@ -163,7 +164,9 @@ namespace WebApplication2.Controllers
                     topicEV.Nameproved = teacher.FullName;
                     topicEV.Approved = true;
                     topicEV.Points = 0;
-                    db.Notifications.Add(new Notification { RecipientID = topicEV.TeacherId, AccountontID = teacher.Id, Messagee = "تم رفض فقرة "+ topic.TopicName, AddedOn = DateTime.Now });
+                    string s2 = " تم ارفض فقرت " + topicEV.Topics.TopicName + " من قبل " + Currentcommit3.comitname + " ذا يوجود اعتراض يرجاء مرجعة المعلومات";
+
+                    db.Notifications.Add(new Notification { RecipientID = topicEV.TeacherId, AccountontID = teacher.Id, Messagee =s2, AddedOn = DateTime.Now });
                     db.Entry(topicEV).State = EntityState.Modified;
                     db.SaveChanges();
                     WebMail.SmtpServer = "smtp.gmail.com";
@@ -174,6 +177,7 @@ namespace WebApplication2.Controllers
                     WebMail.Password = "UOB.cs.com";
                     var CurrentTeacher2 = db.UserToTeachers.Where(a => a.TeacherID == topicEV.TeacherId).SingleOrDefault();
                     string s = " تم ارفض فقرت " + topicEV.Topics.TopicName + " من قبل " + Currentcommit3.comitname + " وفي حالة الارفض الفقره تعطي درجة صفر ذا هناك اعتراض يرجاء مرجعة الموقع";
+
                     WebMail.Send(to: CurrentTeacher2.User.Email, subject: "تقييم الاساتذه", body: s, isBodyHtml: true);
                     return RedirectToAction("Assent");
                 }
@@ -353,5 +357,44 @@ namespace WebApplication2.Controllers
             return RedirectToAction("NotificationView");
         }
 
+        public ActionResult ShowDegreesOfPreviousYears()
+        {
+            var UserID = User.Identity.GetUserId();
+            var CurrentUser = db.Users.Where(a => a.Id == UserID).SingleOrDefault();
+            var CurrentTeacher = db.UserToTeachers.Where(a => a.UserID == UserID).SingleOrDefault();
+            if(CurrentTeacher==null)
+            {
+                return HttpNotFound();
+            }
+            var Ea = db.EvaluationForm.ToList();
+            var Ea2 = new List<EvaluationForm>();
+            foreach(var item in Ea)
+            {
+                var topicEVs = db.TopicEVs.Where(a=>a.EvaluationFormId==item.id&&a.TeacherId==CurrentTeacher.TeacherID);
+                if(topicEVs.Count()>0)
+                {
+                    Ea2.Add(new EvaluationForm { id = item.id, year = item.year, iscurent = item.iscurent });
+                }
+            }
+           
+
+            return View(Ea2);
+
+        }
+        public ActionResult ShowDegreesOfPrevious(int? id)
+        {
+            var UserID = User.Identity.GetUserId();
+            var CurrentUser = db.Users.Where(a => a.Id == UserID).SingleOrDefault();
+            var CurrentTeacher = db.UserToTeachers.Where(a => a.UserID == UserID).SingleOrDefault();
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            var eva = db.EvaluationForm.Find(id);
+            ViewBag.mess = eva.year;
+            var topicEV = db.TopicEVs.Where(a => a.EvaluationFormId == id.Value && a.TeacherId == CurrentTeacher.TeacherID).ToList();
+            return View(topicEV);
+
+        }
     }
 }

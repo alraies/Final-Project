@@ -19,6 +19,11 @@ namespace p00.Controllers
         // GET: Topics
         public ActionResult Index()
         {
+            if (Session["message"] != null)
+            {
+                ViewBag.Message = Session["message"].ToString();
+                Session["message"] = null;
+            }
             var topics = db.Topics.Include(t => t.CommitHees);
             return View(topics.ToList());
         }
@@ -41,6 +46,11 @@ namespace p00.Controllers
         // GET: Topics/Create
         public ActionResult Create()
         {
+            if(db.CommitHees.Count()<=0)
+            {
+                Session["message"] = "لايمكن خلق فقره ذا لما يكون هناك اللجان لتقييم";
+                return RedirectToAction("Index");
+            }
             ViewBag.CommitHeesID = new SelectList(db.CommitHees, "id", "comitname");
             return View();
         }

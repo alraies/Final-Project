@@ -1,11 +1,9 @@
 ﻿@model IEnumerable<p00.Models.Topics>
 
-@{
-    ViewBag.Title = "الفقرات";
-    Layout = "~/Views/Shared/_MainLayout.cshtml";
-}
+@{ ViewBag.Title = "الفقرات";
+                Layout = "~/Views/Shared/_MainLayout.cshtml"; }
 
-    <h2>@ViewBag.Title</h2>
+<h2>@ViewBag.Title</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -33,32 +31,39 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CommitHees.comitname)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TopicName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalPoints)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReqDoc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DocPoints)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.CommitHees.comitname)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TopicName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Description)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TotalPoints)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ReqDoc)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DocPoints)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+    </td>
+</tr>}
 
 </table>
+@if (ViewBag.Message != null)
+{
+<script type="text/javascript">
+        window.onload = function () {
+            alert("@ViewBag.Message");
+        };
+</script>}

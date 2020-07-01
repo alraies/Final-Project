@@ -1,0 +1,29 @@
+﻿@model IEnumerable<p00.Models.EvaluationForm>
+
+@{
+    ViewBag.Title = "ShowDegreesOfPreviousYears";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>تقيمات</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.year)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.year)
+        </td>
+        <td>
+            @Html.ActionLink("عرض التقييم", "ShowDegreesOfPrevious", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>
