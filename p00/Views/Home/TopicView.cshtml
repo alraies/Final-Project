@@ -2,8 +2,8 @@
 @using Microsoft.AspNet.Identity
 @using WebApplication2.Models;
 @{ ViewBag.Title = "TopicView";
-                Layout = "~/Views/Shared/_MainLayout.cshtml"; }
-
+    Layout = "~/Views/Shared/_MainLayout.cshtml"; }
+@*<link href="~/Content/Style.css" rel="stylesheet" />*@
 
 <div class="jumbotron">
     <h1>الحاسبات</h1>
@@ -16,22 +16,40 @@
     var CurrentTeacher = db.UserToTeachers.Where(a => a.UserID == UserID).SingleOrDefault();
     if (CurrentTeacher != null)
     {
-        foreach (var item in Model)
+<div class="card-body">
+    <div id="accordion">
+        @foreach (var item in Model)
         {
-            var document = db.Documents.Where(a => a.TopicEVId == item.Id);
+        var document = db.Documents.Where(a => a.TopicEVId == item.Id);
 
-            // var item3 = item.TopicEVs;  && item.Document == null
-            if (item.Topics.ReqDoc == true && document.Count() <= 0 && item.TeacherId == CurrentTeacher.TeacherID)
-            {
+        // var item3 = item.TopicEVs;  && item.Document == null
+        if (item.Topics.ReqDoc == true && document.Count() <= 0 && item.TeacherId == CurrentTeacher.TeacherID)
+        {
 
-<div class="panel panel-info">
-    <div class="panel-heading"><h1>فقرة @Html.DisplayFor(modelItem => item.Topics.TopicName)</h1></div>
+        @*<div class="panel panel-info">
+            <div class="panel-heading"><h1>فقرة @Html.DisplayFor(modelItem => item.Topics.TopicName)</h1></div>
 
 
-    <div class="row panel-body">
-        <h5>@Html.DisplayFor(modelItem => item.Topics.Description)</h5>
-        <br />
-        @Html.ActionLink("تحميل الوثيقه", "Create", new { id = item.Id }, new { @class = "btn btn-primary" })
+            <div class="row panel-body">
+                <h5>@Html.DisplayFor(modelItem => item.Topics.Description)</h5>
+                <br />
+                @Html.ActionLink("تحميل الوثيقه", "Create", new { id = item.Id }, new { @class = "btn btn-primary" })*@
+        <div class="card card-primary">
+            <div class="card-header">
+                <h4 class="card-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                        <h1>فقرة @Html.DisplayFor(modelItem => item.Topics.TopicName)</h1>
+
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+                <div class="card-body">
+                    @item.Topics.Description <br />
+                   وزن الوثيقه @item.Topics.DocPoints @Html.ActionLink("تحميل الوثيقه", "Create", new { id = item.Id }, new { @class = "btn btn-primary" })
+                </div>
+            </div>
+        </div>
         @*<h5>@Html.DisplayFor(modelItem => item)</h5>*@
         @*@Html.ActionLink("تحميل الوثيقه", "Create", new { id = item.Id, new { @class = "btn btn-primary" })*@
         @*@foreach (var subItem in item.TopicEVs)
@@ -43,9 +61,11 @@
                @Html.ActionLink("التفاصيل", "Details", new { JobId = subItem.Id }, new { @class = "btn btn-primary" })
               </div>
              }*@
+        @*</div>
+
+            </div>*@}
+        }
     </div>
 
-</div>}
-                    }
-                }
+</div>                }
             }

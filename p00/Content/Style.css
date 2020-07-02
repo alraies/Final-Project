@@ -1,4 +1,4 @@
-﻿@font-face{
+﻿/*@font-face{
     font-family: myfont;
     src:url('font/GE_SS_Two_Bold.otf')
 }
@@ -99,12 +99,10 @@ body {
     padding: 12px 20px 12px 12px;
     transition: width 0.4s ease-in-out;
 }
-
+*/
     #searchName:focus {
         width: 100%;
     }
-
-<<<<<<< HEAD
 #Notification {
     width: 200px;
    
@@ -121,7 +119,7 @@ body {
 }
 .btn {
     border-radius: 15px
-=======
+}
 .row {
     display: -ms-flexbox;
     display: flex;
@@ -129,5 +127,30 @@ body {
     flex-wrap: wrap;
     margin-right: -7.5px;
     margin-left: -7.5px;
->>>>>>> f50b24f44e9179e24c64e9937d8ad989cdf431b2
+}
+.panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.panel-info {
+    border-color: #bce8f1;
+}
+
+panel-info > .panel-heading {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+}
+panel-heading {
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    -webkit-border-top-right-radius: 3px;
+    -webkit-border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+}
+panel-body {
+    padding: 15px;
 }
