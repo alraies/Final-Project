@@ -82,14 +82,16 @@
                         <!-- User image -->
                         <li style="height:175px;padding:10px;text-align:center; background-color: #102E5E;">
 
-                            <img src="~/Content/dashboardRTL/dist/img/img_avatar.png" style="vertical-align:middle" class="img-circle" alt="User Image">
+
+                           
+                            <img src="~/Content/dashboard/dist/img/img_avatar.png" style="vertical-align:middle" class="img-circle" alt="User Image">
                             <p>
                                 <b href="#" style="color:#F5C538">
                                     مرحباً بك يا ..
                                     @if (CurrentTeacher != null)
                                     {
                                         var teacher1 = db.Teachers.Find(CurrentTeacher.TeacherID);
-                           @teacher1.FullName}
+                                        @teacher1.FullName}
 
                                 </b>
 

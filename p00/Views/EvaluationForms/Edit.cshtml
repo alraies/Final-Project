@@ -1,18 +1,18 @@
 ﻿@model p00.Models.EvaluationFormViewModel
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "اضافة المحاور";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<h2>Edit</h2>
+<h2>اضافة</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
 <div class="form-horizontal">
-    <h4>EvaluationForm</h4>
+    <h4>المحاور</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.id)
@@ -34,11 +34,12 @@
             </div>
         </div>
     </div>
+    
 
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Sections, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+    <div class="card card-primary">
+        <h3 class="card-header col-lg-12">   @Html.LabelFor(model => model.Sections, "المحاور التي تخص هذه الاستمارة", htmlAttributes: new { @class = "control-label col-md-2" }) </h3>
+        <div class="col-md-10 checkbox">
             @for (int i = 0; i < Model.Sections.Count(); i++)
             {
                 @Html.EditorFor(m => Model.Sections[i].Checked)
@@ -47,13 +48,14 @@
                 @Html.HiddenFor(m => Model.Sections[i].SectionName)
                 @Html.HiddenFor(m => Model.Sections[i].Id)
 
-
+                <br />
+                <br />
             }
         </div>
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
+            <input type="submit" value="حفظ" class="btn btn-outline-success" />
         </div>
     </div>
 </div>

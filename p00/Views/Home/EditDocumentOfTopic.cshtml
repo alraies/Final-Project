@@ -3,74 +3,118 @@
 @using WebApplication2.Models;
 
 @{
-    ViewBag.Title = "EditDocumentOfTopic";
+    ViewBag.Title = "تعديل ورفع الوثائق";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<h1>الوثائق المرفوعه</h1>
+
 @if (Request.IsAuthenticated)
 {
     var db = new ApplicationDbContext();
     var document = db.Documents.Where(a => a.TopicEVId == Model.Id);
-    <div>
-        <h3>تعديل عل وثائق الفقره</h3>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayName("تاريخ الاستماره:")
-            </dt>
+    <div class="col-md-12">
+        <div class="card card-default">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fas fa-pen-nib"></i>
+                    الوثائق المرفوعة للفقرة
+                </h3>
+            </div>
+            <dl class="dl-horizontal">
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <div class="callout callout-warning">
+                        <dt>
+                            <h5> @Html.DisplayName("تاريخ الاستماره:")</h5>
+                        </dt>
+                        <dd>
+                            <p>@Html.DisplayFor(model => model.EvaluationForm.year)</p>
+                        </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.EvaluationForm.year)
-            </dd>
+                    </div>
+                    <div class="callout callout-warning">
+                        <dt>
+                            <h5>   @Html.DisplayNameFor(model => model.Sections.SectionName)</h5>
+                        </dt>
+                        <dd>
+                            <p> @Html.DisplayFor(model => model.Sections.SectionName)</p>
+                        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Sections.SectionName)
-            </dt>
+                    </div>
+                    <div class="callout callout-warning">
+                        <dt>
+                            <h5>   @Html.DisplayNameFor(model => model.Sections.Description)</h5>
+                        </dt>
+                        <dd>
+                            <p>  @Html.DisplayFor(model => model.Sections.Description)</p>
+                        </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.Sections.SectionName)
-            </dd>
+                    </div>
+                    <div class="callout callout-warning">
+                        <dt>
+                            <h5>   @Html.DisplayNameFor(model => model.Topics.TopicName)</h5>
+                        </dt>
+                        <dd>
+                            <p>    @Html.DisplayFor(model => model.Topics.TopicName)</p>
+                        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Sections.Description)
-            </dt>
+                    </div>
+                    <div class="callout callout-warning">
+                        <dt>
+                            <h5>    @Html.DisplayNameFor(model => model.Topics.Description)</h5>
+                        </dt>
+                        <dd>
+                            <p>     @Html.DisplayFor(model => model.Topics.Description)</p>
+                        </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.Sections.Description)
-            </dd>
+                    </div>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Topics.TopicName)
-            </dt>
+                </div>
+            </dl>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+    <div class="col-12">
+        <div class="card card-warning">
+            <div class="card-header">
+                <div class="card-title">
+                    الوثائق الخاصة بالفقرة
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    @foreach (var itme in document)
+                    {
 
-            <dd>
-                @Html.DisplayFor(model => model.Topics.TopicName)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Topics.Description)
-            </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Topics.Description)
-            </dd>
-        </dl>
+
+                        <div class="col-sm-2">
+                            <a href="~/Uploads/@itme.Name" data-toggle="lightbox" data-title="@itme.Name" data-gallery="gallery">
+                                <img src="~/Uploads/@itme.Name" class="img-fluid mb-2" alt="وثيقة" />
+                            </a>
+                            <div class="row panel-body card-footer">
+                                @Html.ActionLink("تغيير الوثيقه", "EditDocumentOf", new { id = itme.IdDocument }, new { @class = "btn btn-primary" })
+                            </div>
+                        </div>
+
+
+
+                    }
+                </div>
+                <br />
+                <div class="card-footer btn btn-outline-success">  @Html.ActionLink("الرجوع الى القائمة", "DocumentsofTopic")</div>
+                </div>
+        </div>
     </div>
 
-    foreach (var itme in document)
-    {
-        <div class="panel">
-            
-            <img src="~/Uploads/@itme.Name" width="600" height="1050"/>
-                 <div class="row panel-body">
-                  @Html.ActionLink("تحميل الوثيقه", "EditDocumentOf", new { id =itme.IdDocument }, new { @class = "btn btn-primary" })
-                 </div>
-        </div>
-       
-    }
+
+
+
+
 
 }
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+    
+  
+

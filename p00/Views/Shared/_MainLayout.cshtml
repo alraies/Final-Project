@@ -6,6 +6,10 @@
     <title>@ViewBag.Title</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+
+    
+   
     <!-- Font Awesome -->
     <link rel="stylesheet" href="~/Content/dashboard/plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
@@ -48,7 +52,7 @@
             <ul class="navbar-nav ml-auto">
                 <!-- Messages Dropdown Menu -->
                 <li>
-                    <img src="~/Content/dashboardRTL/dist/img/img_avatar.png"
+                    <img src="~/Content/dashboard/dist/img/img_avatar.png"
                          style="
                 float:left;
                 width:30px;
@@ -62,7 +66,7 @@
                     <!--Partial Login-->
                     @Html.Partial("_Login")
                 </li>
-               
+
 
             </ul>
         </nav>
@@ -98,7 +102,7 @@
 
                         <li class="nav-item has-treeview ">
                             <a href="" class="nav-link ">
-                                <i class="nav-icon fas fa-bars"></i>
+                                <i class="nav-icon fas fa-award"></i>
                                 <p>
                                     <span>اللجان</span>
                                     <i class="fas fa-angle-left right"></i>
@@ -131,7 +135,7 @@
                         </li>
                         <li class="nav-item has-treeview ">
                             <a href="" class="nav-link ">
-                                <i class="nav-icon fas fa-brush"></i>
+                                <i class="nav-icon fas fa-file-archive"></i>
                                 <p>
                                     <span>الاستمارة</span>
                                     <i class="fas fa-angle-left right"></i>
@@ -232,6 +236,7 @@
     <!-- jQuery -->
     <script src="~/Content/dashboard/plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
+    
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
@@ -266,6 +271,9 @@
     <script src="~/Content/dashboard/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="~/Content/dashboard/plugins/datatables/dataTables.bootstrap.min.js"></script>
     <script src="~/Content/dashboard/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <!-- Ekko Lightbox -->
+    <script src="~/Content/dashboard/plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
+
     <script>
         $(function () {
             $("#example1").DataTable();
@@ -291,5 +299,43 @@
 
         });
     </script>
+    <script>
+        $(function () {
+            $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+                event.preventDefault();
+                $(this).ekkoLightbox({
+                    alwaysShowClose: true
+                });
+            });
+
+            $('.filter-container').filterizr({ gutterPixels: 3 });
+            $('.btn[data-filter]').on('click', function () {
+                $('.btn[data-filter]').removeClass('active');
+                $(this).addClass('active');
+            });
+        })
+    </script>
+    
+   
+    @*<script>
+        // Initialize a new plugin instance for all
+        // e.g. $('input[type="range"]') elements.
+        $('input[type="range"]').rangeslider();
+
+        // Destroy all plugin instances created from the
+        // e.g. $('input[type="range"]') elements.
+        $('input[type="range"]').rangeslider('destroy');
+
+        // Update all rangeslider instances for all
+        // e.g. $('input[type="range"]') elements.
+        // Usefull if you changed some attributes e.g. `min` or `max` etc.
+        $('input[type="range"]').rangeslider('update', true);
+    </script>*@
+    <script>
+        function rangeSlide(value) {
+            document.getElementById('rangevalue').innerHTML = value;
+        }
+    </script>
+    
 </body>
 </html>

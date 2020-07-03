@@ -22,7 +22,7 @@ namespace p00.Models
         [Required]
         [Display(Name = "تتطلب وثائق؟!")]
         public Boolean ReqDoc { get; set; }
-        [Required]
+       
         [Display(Name = "وزن الوثيقة")]
         public int DocPoints { get; set; }
         [Required]

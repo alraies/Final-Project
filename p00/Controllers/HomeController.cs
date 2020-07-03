@@ -14,7 +14,7 @@ using System.Web.Helpers;
 
 namespace WebApplication2.Controllers
 {
-  
+  [Authorize]
         public class HomeController : Controller
         {
             private ApplicationDbContext db = new ApplicationDbContext();
@@ -66,11 +66,12 @@ namespace WebApplication2.Controllers
                 upload.SaveAs(path);
                 }
                 db.SaveChanges();
+              
             }
             else
                 return HttpNotFound();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("DocumentsofTopic");
 
             }
 
@@ -141,7 +142,7 @@ namespace WebApplication2.Controllers
                     WebMail.EnableSsl = true;
                     WebMail.UserName="UOB.cs.com@gmail.com";
                     WebMail.Password = "UOB.cs.com";
-                    string s = " تمت الموافقه عل فقرت " + topicEV.Topics.TopicName + " \n من قبل " + Currentcommit3.comitname + "";
+                    string s = " تم التقييم والموافقة الموافقه  على فقرة " + topics.TopicName + " \n من قبل " + Currentcommit3.comitname + "";
                     db.Notifications.Add(new Notification { RecipientID = topicEV.TeacherId, AccountontID = teacher.Id, Messagee = s, AddedOn = DateTime.Now });
                     db.Entry(topicEV).State = EntityState.Modified;
                     db.SaveChanges();
@@ -164,7 +165,7 @@ namespace WebApplication2.Controllers
                     topicEV.Nameproved = teacher.FullName;
                     topicEV.Approved = true;
                     topicEV.Points = 0;
-                    string s2 = " تم ارفض فقرت " + topicEV.Topics.TopicName + " من قبل " + Currentcommit3.comitname + " ذا يوجود اعتراض يرجاء مرجعة المعلومات";
+                    string s2 = "تم رفض فقرة " + topicEV.Topics.TopicName + " من قبل " + Currentcommit3.comitname + " ذا يوجود اعتراض يرجاء مرجعة المعلومات";
 
                     db.Notifications.Add(new Notification { RecipientID = topicEV.TeacherId, AccountontID = teacher.Id, Messagee =s2, AddedOn = DateTime.Now });
                     db.Entry(topicEV).State = EntityState.Modified;
@@ -248,7 +249,7 @@ namespace WebApplication2.Controllers
 
             return View(teacher);
         }
-        [Authorize(Roles = "لجنة,Admins")]
+        [Authorize(Roles = "لجنة,admin")]
         public ActionResult TeachersLists()
         {
             return View(db.Teachers.ToList());

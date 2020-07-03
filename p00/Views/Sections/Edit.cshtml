@@ -1,69 +1,79 @@
 ﻿@model p00.Models.SectionsViewModel
 
 @{
-    ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_MainLayout.cshtml";
+    ViewBag.Title = "تعديل";
+    Layout = null;
 }
 
-<h2>Edit</h2>
+
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>Sections</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.Id)
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.SectionName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.SectionName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.SectionName, "", new { @class = "text-danger" })
+    <div style="        margin: 0 auto; /* Added */
+        float: none; /* Added */
+        margin-bottom: 10px; /* Added */
+        font-family: Tajawal;
+        border: 5px; background-color:#f5f6fa" class="col-lg-12 card card-primary col-xs-12  ">
+        <div class="card-header">
+            <h3 class="card-title float-lg-none">تعديل</h3>
         </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form role="form">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-group col-md-12">
+                @Html.LabelFor(model => model.SectionName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.SectionName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SectionName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TotalPoints, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.TotalPoints, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TotalPoints, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Topics,"الفقرات التابعة لهذا المحور", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-12">
+                    @for (int i = 0; i < Model.Topics.Count(); i++)
+                    {
+                        @Html.EditorFor(m => Model.Topics[i].Checked)
+                        @Html.DisplayFor(m => Model.Topics[i].TopicName)
+
+                        @Html.HiddenFor(m => Model.Topics[i].TopicName)
+                        @Html.HiddenFor(m => Model.Topics[i].Id)
+
+                    <br />
+                    }
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="حفظ" class="btn btn-outline-success" />
+                </div>
+            </div>
+            </form>
     </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.TotalPoints, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.TotalPoints, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.TotalPoints, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-
-   <div class="form-group">
-        @Html.LabelFor(model => model.Topics, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @for (int i = 0; i < Model.Topics.Count(); i++)
-            {
-                @Html.EditorFor(m => Model.Topics[i].Checked)
-                @Html.DisplayFor(m => Model.Topics[i].TopicName)
-
-                @Html.HiddenFor(m => Model.Topics[i].TopicName)
-                @Html.HiddenFor(m => Model.Topics[i].Id)
-
-
-            }
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
-        </div>
-    </div>
-</div>
 }
 
 <div>

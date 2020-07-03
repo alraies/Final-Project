@@ -22,6 +22,15 @@
     margin-top:30px;
     transform: translate(-50%, -50%);
 }
+.field-validation-error {
+    color: #e80c4d;
+    font-weight: bold;
+}
+
+
+input.input-validation-error {
+    border: 1px solid #e80c4d;
+}
 .logo1 {
     height: 130px;
 }

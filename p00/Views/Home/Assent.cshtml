@@ -3,7 +3,7 @@
 @using WebApplication2.Models;
 
 @{
-    ViewBag.Title = "Assent";
+    ViewBag.Title = "تقييم";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
@@ -20,11 +20,14 @@
         {
             var Currentcommit2 = db.CommHees.Where(a => a.id == Currentcommit.CommHeeid).SingleOrDefault();
             var Currentcommit3 = db.CommitHees.Where(a => a.id == Currentcommit2.CommitHeesid).SingleOrDefault();
-        <div class="jumbotron">
+        <div class="card col-lg-12">
             @*<h1>الحاسبات</h1>*@
-            <h1>@Currentcommit3.comitname</h1>
-            <p class="lead">@Currentcommit3.comitDecipt .</p>
-            <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+            <h1 class="card-header-tabs">@Currentcommit3.comitname</h1>
+            <div>
+                <p class="card-body">@Currentcommit3.comitDecipt .</p>
+            </div>
+           
+           
         </div>
         /////////////////////////////////////
 
@@ -37,47 +40,48 @@
 
 
 
-           <div class="panel panel-info">
-               <div class="panel-heading"><h1>@Html.DisplayFor(modelItem => item.FullName)</h1></div>
+<div class="content-wrapper">
+    <div class="panel-heading"><h1>@Html.DisplayFor(modelItem => item.FullName)</h1></div>
 
-                
-               <div class="row panel-body">
-                  
-                   <h2>تقييم الفقرات</h2>
-                   @*////////////////////////////////////////////*@
-                   @foreach (var item2 in Model)
-                   {
-                       var document = db.Documents.Where(a => a.TopicEVId == item2.Id);
-                       if (item2.Topics.CommitHeesID == Currentcommit3.id && item2.Approved == false && item2.TeacherId == item.Id)
-                       {
-               <div class="col-md-3 thumbnail" style="margin-left:20px; margin-bottom:30px; min-height:275px;">
-                   <h2>محور @Html.DisplayFor(modelItem => item2.Sections.SectionName)</h2>
-                   <h3>فقرة @Html.DisplayFor(modelItem => item2.Topics.TopicName)</h3>
-                   <h5>@Html.DisplayFor(modelItem => item2.Topics.Description)</h5>
-                   @if (item2.Topics.ReqDoc == true)
-                   {
-                       <h4>هذا الفقره تحتاج وثيقه</h4>
-                       if (document.Count()<=0)
-                       {
-                           <h5>لم يتم رفع وثيقه من قبل @item.FullName</h5>
-                       }
-                       else
-                       {
-                           <h5>تم رفع الوثيقه من قبل @item.FullName</h5>
-                       }
-                   }
-                   else
-                   {
-                       <h4>لاتحتاج لوثيقه</h4>
-                   }
-                   @Html.ActionLink("تقيم", "Edit", new { id = item2.Id }, new { @class = "btn btn-primary" })
-               </div>
-                       }
+    <h2>تقييم الفقرات</h2>
+    <div class="row panel-body">
 
-                   }
 
-                   @*///////////////////////////////*@
-               </div>
+        <br />
+        @*////////////////////////////////////////////*@
+        @foreach (var item2 in Model)
+        {
+            var document = db.Documents.Where(a => a.TopicEVId == item2.Id);
+            if (item2.Topics.CommitHeesID == Currentcommit3.id && item2.Approved == false && item2.TeacherId == item.Id)
+            {
+                <div class="col-md-3 card card-warning">
+                    <h2 class="card-header">محور @Html.DisplayFor(modelItem => item2.Sections.SectionName)</h2>
+                    <h3 class="card-body">فقرة @Html.DisplayFor(modelItem => item2.Topics.TopicName)</h3>
+                    <h5 class="card-body">@Html.DisplayFor(modelItem => item2.Topics.Description)</h5>
+                    @if (item2.Topics.ReqDoc == true)
+                    {
+                        <h4>هذا الفقره تحتاج وثيقه</h4>
+                        if (document.Count() <= 0)
+                        {
+                            <h5>لم يتم رفع وثيقه من قبل @item.FullName</h5>
+                        }
+                        else
+                        {
+                            <h5>تم رفع الوثيقه من قبل @item.FullName</h5>
+                        }
+                    }
+                    else
+                    {
+                        <h4 >لاتحتاج لوثيقه</h4>
+                    }
+                    @Html.ActionLink("تقييم", "Edit", new { id = item2.Id }, new { @class = "btn btn-outline-dark" })
+                </div>
+            }
+
+        }
+
+        @*///////////////////////////////*@
+    </div>
 
 </div>
             }

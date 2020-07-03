@@ -141,6 +141,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\dashboard\dist\css\adminlte.css" />
     <Content Include="Content\dashboard\dist\css\adminlte.min.css" />
@@ -1759,6 +1762,7 @@
     <Content Include="Content\font\fontawesome-webfont.svg" />
     <Content Include="Content\font\glyphicons-halflings-regular.svg" />
     <Content Include="Content\font\index.html" />
+    <Content Include="Content\Site.css" />
     <Content Include="Content\Style.css" />
     <Content Include="Content\styles.css" />
     <Content Include="Content\themes\base\accordion.css" />
@@ -1810,8 +1814,19 @@
     <Content Include="Global.asax" />
     <Content Include="Images\logo-ar-white-300x277.png" />
     <Content Include="Images\logo-ar703.png" />
+    <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery.js" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\notify.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -1838,109 +1853,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202004160850228_AddSectionsAndTobicsTables.cs" />
-    <Compile Include="Migrations\202004160850228_AddSectionsAndTobicsTables.Designer.cs">
-      <DependentUpon>202004160850228_AddSectionsAndTobicsTables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202004180248024_AddTeacherTable.cs" />
-    <Compile Include="Migrations\202004180248024_AddTeacherTable.Designer.cs">
-      <DependentUpon>202004180248024_AddTeacherTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202004181451500_InitalMigration.cs" />
-    <Compile Include="Migrations\202004181451500_InitalMigration.Designer.cs">
-      <DependentUpon>202004181451500_InitalMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202004190317192_updata.cs" />
-    <Compile Include="Migrations\202004190317192_updata.Designer.cs">
-      <DependentUpon>202004190317192_updata.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202005071315499_saetion_topics.cs" />
-    <Compile Include="Migrations\202005071315499_saetion_topics.Designer.cs">
-      <DependentUpon>202005071315499_saetion_topics.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202005072019436_saetion_topics2.cs" />
-    <Compile Include="Migrations\202005072019436_saetion_topics2.Designer.cs">
-      <DependentUpon>202005072019436_saetion_topics2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202005072253482_addEvaluationForm.cs" />
-    <Compile Include="Migrations\202005072253482_addEvaluationForm.Designer.cs">
-      <DependentUpon>202005072253482_addEvaluationForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202005072302037_addEvaluationForm1.cs" />
-    <Compile Include="Migrations\202005072302037_addEvaluationForm1.Designer.cs">
-      <DependentUpon>202005072302037_addEvaluationForm1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202005080000239_addEvaluationFormmtomsection.cs" />
-    <Compile Include="Migrations\202005080000239_addEvaluationFormmtomsection.Designer.cs">
-      <DependentUpon>202005080000239_addEvaluationFormmtomsection.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202005080034407_addEvaluationFormmtomsection1.cs" />
-    <Compile Include="Migrations\202005080034407_addEvaluationFormmtomsection1.Designer.cs">
-      <DependentUpon>202005080034407_addEvaluationFormmtomsection1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202005120818303_AddTopicEvTableAndDocumentTable.cs" />
-    <Compile Include="Migrations\202005120818303_AddTopicEvTableAndDocumentTable.Designer.cs">
-      <DependentUpon>202005120818303_AddTopicEvTableAndDocumentTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006141449428_topicsTocommithees.cs" />
-    <Compile Include="Migrations\202006141449428_topicsTocommithees.Designer.cs">
-      <DependentUpon>202006141449428_topicsTocommithees.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006171151226_Notifiation.cs" />
-    <Compile Include="Migrations\202006171151226_Notifiation.Designer.cs">
-      <DependentUpon>202006171151226_Notifiation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006171159257_Notifiation1.cs" />
-    <Compile Include="Migrations\202006171159257_Notifiation1.Designer.cs">
-      <DependentUpon>202006171159257_Notifiation1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006180048014_UserToTeacher1.cs" />
-    <Compile Include="Migrations\202006180048014_UserToTeacher1.Designer.cs">
-      <DependentUpon>202006180048014_UserToTeacher1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006180347086_EvaluationToTopicEV.cs" />
-    <Compile Include="Migrations\202006180347086_EvaluationToTopicEV.Designer.cs">
-      <DependentUpon>202006180347086_EvaluationToTopicEV.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006181052161_EvaluationToTopicEV2.cs" />
-    <Compile Include="Migrations\202006181052161_EvaluationToTopicEV2.Designer.cs">
-      <DependentUpon>202006181052161_EvaluationToTopicEV2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006181320063_EvaluationToTopicEV3.cs" />
-    <Compile Include="Migrations\202006181320063_EvaluationToTopicEV3.Designer.cs">
-      <DependentUpon>202006181320063_EvaluationToTopicEV3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006182229531_DocumentToTopicEV.cs" />
-    <Compile Include="Migrations\202006182229531_DocumentToTopicEV.Designer.cs">
-      <DependentUpon>202006182229531_DocumentToTopicEV.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006182234441_DocumentToTopicEV1.cs" />
-    <Compile Include="Migrations\202006182234441_DocumentToTopicEV1.Designer.cs">
-      <DependentUpon>202006182234441_DocumentToTopicEV1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006191014073_TopicEVToTopics.cs" />
-    <Compile Include="Migrations\202006191014073_TopicEVToTopics.Designer.cs">
-      <DependentUpon>202006191014073_TopicEVToTopics.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006241232569_addPrmaryKeyinTableDucment.cs" />
-    <Compile Include="Migrations\202006241232569_addPrmaryKeyinTableDucment.Designer.cs">
-      <DependentUpon>202006241232569_addPrmaryKeyinTableDucment.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006241416315_addPrmaryKeyinTableDucment1.cs" />
-    <Compile Include="Migrations\202006241416315_addPrmaryKeyinTableDucment1.Designer.cs">
-      <DependentUpon>202006241416315_addPrmaryKeyinTableDucment1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006241537041_deleletPrmaryKeyinTableDucment.cs" />
-    <Compile Include="Migrations\202006241537041_deleletPrmaryKeyinTableDucment.Designer.cs">
-      <DependentUpon>202006241537041_deleletPrmaryKeyinTableDucment.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006241600224_TopicEVTOdocumnt.cs" />
-    <Compile Include="Migrations\202006241600224_TopicEVTOdocumnt.Designer.cs">
-      <DependentUpon>202006241600224_TopicEVTOdocumnt.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006241602348_TopicEVTOdocumnt1.cs" />
-    <Compile Include="Migrations\202006241602348_TopicEVTOdocumnt1.Designer.cs">
-      <DependentUpon>202006241602348_TopicEVTOdocumnt1.cs</DependentUpon>
+    <Compile Include="Migrations\202007021126214_TestUpdate.cs" />
+    <Compile Include="Migrations\202007021126214_TestUpdate.Designer.cs">
+      <DependentUpon>202007021126214_TestUpdate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -2212,86 +2127,6 @@
     <Folder Include="Views\Notifications\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202004160850228_AddSectionsAndTobicsTables.resx">
-      <DependentUpon>202004160850228_AddSectionsAndTobicsTables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004180248024_AddTeacherTable.resx">
-      <DependentUpon>202004180248024_AddTeacherTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004181451500_InitalMigration.resx">
-      <DependentUpon>202004181451500_InitalMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004190317192_updata.resx">
-      <DependentUpon>202004190317192_updata.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005071315499_saetion_topics.resx">
-      <DependentUpon>202005071315499_saetion_topics.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005072019436_saetion_topics2.resx">
-      <DependentUpon>202005072019436_saetion_topics2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005072253482_addEvaluationForm.resx">
-      <DependentUpon>202005072253482_addEvaluationForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005072302037_addEvaluationForm1.resx">
-      <DependentUpon>202005072302037_addEvaluationForm1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005080000239_addEvaluationFormmtomsection.resx">
-      <DependentUpon>202005080000239_addEvaluationFormmtomsection.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005080034407_addEvaluationFormmtomsection1.resx">
-      <DependentUpon>202005080034407_addEvaluationFormmtomsection1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005120818303_AddTopicEvTableAndDocumentTable.resx">
-      <DependentUpon>202005120818303_AddTopicEvTableAndDocumentTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006141449428_topicsTocommithees.resx">
-      <DependentUpon>202006141449428_topicsTocommithees.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006171151226_Notifiation.resx">
-      <DependentUpon>202006171151226_Notifiation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006171159257_Notifiation1.resx">
-      <DependentUpon>202006171159257_Notifiation1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006180048014_UserToTeacher1.resx">
-      <DependentUpon>202006180048014_UserToTeacher1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006180347086_EvaluationToTopicEV.resx">
-      <DependentUpon>202006180347086_EvaluationToTopicEV.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006181052161_EvaluationToTopicEV2.resx">
-      <DependentUpon>202006181052161_EvaluationToTopicEV2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006181320063_EvaluationToTopicEV3.resx">
-      <DependentUpon>202006181320063_EvaluationToTopicEV3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006182229531_DocumentToTopicEV.resx">
-      <DependentUpon>202006182229531_DocumentToTopicEV.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006182234441_DocumentToTopicEV1.resx">
-      <DependentUpon>202006182234441_DocumentToTopicEV1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006191014073_TopicEVToTopics.resx">
-      <DependentUpon>202006191014073_TopicEVToTopics.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006241232569_addPrmaryKeyinTableDucment.resx">
-      <DependentUpon>202006241232569_addPrmaryKeyinTableDucment.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006241416315_addPrmaryKeyinTableDucment1.resx">
-      <DependentUpon>202006241416315_addPrmaryKeyinTableDucment1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006241537041_deleletPrmaryKeyinTableDucment.resx">
-      <DependentUpon>202006241537041_deleletPrmaryKeyinTableDucment.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006241600224_TopicEVTOdocumnt.resx">
-      <DependentUpon>202006241600224_TopicEVTOdocumnt.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006241602348_TopicEVTOdocumnt1.resx">
-      <DependentUpon>202006241602348_TopicEVTOdocumnt1.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <TypeScriptCompile Include="Content\dashboard\plugins\fullcalendar-bootstrap\main.d.ts" />
     <TypeScriptCompile Include="Content\dashboard\plugins\fullcalendar-daygrid\main.d.ts" />
     <TypeScriptCompile Include="Content\dashboard\plugins\fullcalendar-interaction\main.d.ts" />
@@ -2300,6 +2135,11 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202007021126214_TestUpdate.resx">
+      <DependentUpon>202007021126214_TestUpdate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
