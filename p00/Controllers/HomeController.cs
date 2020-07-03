@@ -146,6 +146,7 @@ namespace WebApplication2.Controllers
                     db.Notifications.Add(new Notification { RecipientID = topicEV.TeacherId, AccountontID = teacher.Id, Messagee = s, AddedOn = DateTime.Now });
                     db.Entry(topicEV).State = EntityState.Modified;
                     db.SaveChanges();
+                    SendNotification(topicEV, teacher.Id);
                     var CurrentTeacher2 = db.UserToTeachers.Where(a => a.TeacherID==topicEV.TeacherId).SingleOrDefault();
                    
                     WebMail.Send(to:CurrentTeacher2.User.Email,subject:"تقييم الاساتذه",body:s,isBodyHtml:true);
@@ -162,10 +163,11 @@ namespace WebApplication2.Controllers
                     var Currentcommit = db.CommHeeMembers.Where(a => a.Teacherid == CurrentTeacher.TeacherID).SingleOrDefault();
                     var Currentcommit2 = db.CommHees.Where(a => a.id == Currentcommit.CommHeeid).SingleOrDefault();
                     var Currentcommit3 = db.CommitHees.Where(a => a.id == Currentcommit2.CommitHeesid).SingleOrDefault();
+                    var topics = db.Topics.Find(topicEV.TopicsId);
                     topicEV.Nameproved = teacher.FullName;
                     topicEV.Approved = true;
                     topicEV.Points = 0;
-                    string s2 = "تم رفض فقرة " + topicEV.Topics.TopicName + " من قبل " + Currentcommit3.comitname + " ذا يوجود اعتراض يرجاء مرجعة المعلومات";
+                    string s2 = "تم رفض فقرة " + topics.TopicName + " من قبل " + Currentcommit3.comitname + " ذا يوجود اعتراض يرجاء مرجعة المعلومات";
 
                     db.Notifications.Add(new Notification { RecipientID = topicEV.TeacherId, AccountontID = teacher.Id, Messagee =s2, AddedOn = DateTime.Now });
                     db.Entry(topicEV).State = EntityState.Modified;
@@ -177,8 +179,8 @@ namespace WebApplication2.Controllers
                     WebMail.UserName = "UOB.cs.com@gmail.com";
                     WebMail.Password = "UOB.cs.com";
                     var CurrentTeacher2 = db.UserToTeachers.Where(a => a.TeacherID == topicEV.TeacherId).SingleOrDefault();
-                    string s = " تم ارفض فقرت " + topicEV.Topics.TopicName + " من قبل " + Currentcommit3.comitname + " وفي حالة الارفض الفقره تعطي درجة صفر ذا هناك اعتراض يرجاء مرجعة الموقع";
-
+                    string s = " تم ارفض فقرت " + topics.TopicName + " من قبل " + Currentcommit3.comitname + " وفي حالة الارفض الفقره تعطي درجة صفر ذا هناك اعتراض يرجاء مرجعة الموقع";
+                    SendNotification(topicEV, teacher.Id);
                     WebMail.Send(to: CurrentTeacher2.User.Email, subject: "تقييم الاساتذه", body: s, isBodyHtml: true);
                     return RedirectToAction("Assent");
                 }
@@ -190,7 +192,26 @@ namespace WebApplication2.Controllers
                 ViewBag.TopicsId = new SelectList(db.Topics, "Id", "TopicName", topicEV.TopicsId);
                 return View(topicEV);
             }
-       
+        public void SendNotification(TopicEV topicEV, int id)
+        {
+            var top = db.TopicEVs.Where(a => a.EvaluationFormId == topicEV.EvaluationFormId && a.TeacherId == topicEV.TopicsId && a.Approved == false);
+            if (top.Count() <= 0)
+            {
+                WebMail.SmtpServer = "smtp.gmail.com";
+                WebMail.SmtpPort = 587;
+                WebMail.SmtpUseDefaultCredentials = true;
+                WebMail.EnableSsl = true;
+                WebMail.UserName = "UOB.cs.com@gmail.com";
+                WebMail.Password = "UOB.cs.com";
+                string s = "رجع الموقع لمعرفة درجة تقيمك تم تقييمك من قبل اللجان";
+                var CurrentTeacher2 = db.UserToTeachers.Where(a => a.TeacherID == topicEV.TeacherId).SingleOrDefault();
+                WebMail.Send(to: CurrentTeacher2.User.Email, subject: "تقييم الاساتذه", body: s, isBodyHtml: true);
+                db.Notifications.Add(new Notification { RecipientID = topicEV.TeacherId, AccountontID = id, Messagee = "تم تقيمك يمكن معرفة درجة تقيمك وتفاصيل التقيم", AddedOn = DateTime.Now });
+                db.SaveChanges();
+            }
+
+        }
+      
         public ActionResult DegreeOfAssessment()
         {
             var topicEVs = db.TopicEVs.Include(t => t.Document).Include(t => t.EvaluationForm).Include(t => t.Sections).Include(t => t.Teacher).Include(t => t.Topics);
@@ -249,7 +270,7 @@ namespace WebApplication2.Controllers
 
             return View(teacher);
         }
-        [Authorize(Roles = "لجنة,admin")]
+        //[Authorize(Roles = "لجنة,admin")]
         public ActionResult TeachersLists()
         {
             return View(db.Teachers.ToList());

@@ -2114,6 +2114,7 @@
     <Content Include="Views\EvaluationForms\LateForSubmission.cshtml" />
     <Content Include="Views\Home\ShowDegreesOfPreviousYears.cshtml" />
     <Content Include="Views\Home\ShowDegreesOfPrevious.cshtml" />
+    <Content Include="Views\Shared\_Powers.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
