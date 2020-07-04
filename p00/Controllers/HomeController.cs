@@ -81,9 +81,12 @@ namespace WebApplication2.Controllers
             return View(topicEVs.ToList());
             }
             [HttpPost]
-            public ActionResult Assent(int id)
+            public ActionResult Assent(string searchName)
             {
-                return View();
+              var topicEVs = db.TopicEVs.Include(t => t.Document).Include(t => t.EvaluationForm).Include(t => t.Sections).Include(t => t.Teacher).Include(t => t.Topics);
+              var top = topicEVs.Where(a => a.Teacher.FullName.Contains(searchName)).ToList();
+            Session["name"] = searchName;
+              return View(top);
             }
             // GET: TopicEVs/Edit/5
             public ActionResult Edit(int? id)

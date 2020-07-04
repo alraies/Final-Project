@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -475,7 +476,48 @@ namespace WebApplication2.Controllers
         {
             return View();
         }
+        public ActionResult AuthorityManagement()
+        {
 
+            return View(db.Teachers.ToList());
+        }
+        public ActionResult EditAuthorityManagement(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.AccountType = new SelectList(db.Roles, "Name", "Name");
+            var user = db.UserToTeachers.Where(a => a.TeacherID == id.Value).SingleOrDefault();
+            var user2 = db.Users.Find(user.UserID);
+            AuthorityManagement au = new AuthorityManagement();
+            au.Id =id.Value;
+            au.AccountType = user2.AccountType;
+           
+            return View(au);
+        }
+        [HttpPost]
+        public async Task<ActionResult> EditAuthorityManagement(AuthorityManagement user)
+        {
+           ViewBag.AccountType = new SelectList(db.Roles, "Name", "Name");
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            var user2 = db.UserToTeachers.Where(a => a.TeacherID ==user.Id).SingleOrDefault();
+            var user3 = db.Users.Find(user2.UserID);
+            if (user2==null)
+            {
+                return HttpNotFound();
+            }
+            await UserManager.RemoveFromRoleAsync(user3.Id, user3.AccountType);
+            await UserManager.AddToRoleAsync(user3.Id,user.AccountType);
+            user3.AccountType = user.AccountType;
+            db.Entry(user3).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("AuthorityManagement");
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -61,7 +61,12 @@ namespace WebApplication2.Models
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
     }
-
+    public class AuthorityManagement
+    {
+        public int Id { get; set; }
+        [Display(Name = "نوع الحساب")]
+        public string AccountType { get; set; }
+    }
     public class RegisterViewModel
     {
        
