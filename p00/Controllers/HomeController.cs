@@ -197,7 +197,7 @@ namespace WebApplication2.Controllers
             }
         public void SendNotification(TopicEV topicEV, int id)
         {
-            var top = db.TopicEVs.Where(a => a.EvaluationFormId == topicEV.EvaluationFormId && a.TeacherId == topicEV.TopicsId && a.Approved == false);
+            var top = db.TopicEVs.Where(a => a.EvaluationFormId == topicEV.EvaluationFormId && a.TeacherId == topicEV.TeacherId && a.Approved == false);
             if (top.Count() <= 0)
             {
                 WebMail.SmtpServer = "smtp.gmail.com";

@@ -1860,7 +1860,6 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\UserRoles.cs" />
     <Compile Include="Models\CheckSectionsViewModel.cs" />
     <Compile Include="Models\CommHee.cs" />
     <Compile Include="Models\CommHeeMembers.cs" />
@@ -2130,8 +2129,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Uploads\" />
     <Folder Include="Views\Notifications\" />
-    <Folder Include="Views\UserRoles\" />
-    <Folder Include="Views\UserRolse\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Content\dashboard\plugins\fullcalendar-bootstrap\main.d.ts" />
