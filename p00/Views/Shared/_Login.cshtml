@@ -29,28 +29,28 @@
                         {
                             if (notification.Count() > 0)
                             {
-                             <span class="badge badge-warning navbar-badge">@notification.Count()</span>
+                                <span class="badge badge-warning navbar-badge">@notification.Count()</span>
                             }
                         }
-                                            </a>
+                    </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                         @if (CurrentTeacher != null)
-                         {
-                              <span class="dropdown-item dropdown-header">@notification.Count() Notifications</span>
-                             foreach (var itme in notification)
-                             {
-                       
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i> @itme.Messagee
-                            <span class="float-right text-muted text-sm">@itme.AddedOn</span>
-                        </a>
-                        
-                        
-                             }
-                             <div class="dropdown-divider"></div>
-                        <a href="~/Home/NotificationView" class="dropdown-item dropdown-footer">See All Notifications</a>
-                         }
+                        @if (CurrentTeacher != null)
+                        {
+                            <span class="dropdown-item dropdown-header">@notification.Count() Notifications</span>
+                            foreach (var itme in notification)
+                            {
+
+                                <div class="dropdown-divider"></div>
+                                <a href="~/Home/NotificationView" class="dropdown-item">
+                                    <i class="fas fa-envelope mr-2 ">  </i><p>@itme.Messagee</p>
+                                    <span class="float-right text-muted text-sm " style="margin-left:2px;">@itme.AddedOn</span>
+                                </a>
+
+
+                            }
+                            <div class="dropdown-divider"></div>
+                            <a href="~/Home/NotificationView" class="dropdown-item dropdown-footer">See All Notifications</a>
+                        }
                     </div>
                 </li>
 
@@ -66,24 +66,25 @@
                                 var teacher = db.Teachers.Find(CurrentTeacher.TeacherID);
 
 
-            <div class="pull-left info">
-                <p style="color:#F5C538"><strong>   مرحباً بك يا .. @teacher.FullName </strong></p>
+                                <div class="pull-left info">
+                                    <p style="color:#F5C538"><strong>   مرحباً بك يا .. @teacher.FullName </strong></p>
 
-            </div> }
-        else
-        {
-            <div class="pull-left info">
-                <strong style="color:#F5C538">   مرحباً بك يا .. @CurrentUser.UserName</strong>
+                                </div> }
+                            else
+                            {
+                                <div class="pull-left info">
+                                    <strong style="color:#F5C538">   مرحباً بك يا .. @CurrentUser.UserName</strong>
 
-            </div>}
+                                </div>}
                         </span>
+
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li style="height:175px;padding:10px;text-align:center; background-color: #102E5E;">
 
 
-                           
+
                             <img src="~/Content/dashboard/dist/img/img_avatar.png" style="vertical-align:middle" class="img-circle" alt="User Image">
                             <p>
                                 <b href="#" style="color:#F5C538">
@@ -92,7 +93,8 @@
                                     {
                                         var teacher1 = db.Teachers.Find(CurrentTeacher.TeacherID);
                                         @teacher1.FullName}
-
+                                    <br />
+                                    نوع الحساب :@CurrentUser.AccountType
                                 </b>
 
 
@@ -108,23 +110,23 @@
                             @if (CurrentTeacher != null)
                             {@*@if (CurrentUser.Id == CurrentTeacher.UserID) { }*@
 
-                                                    <li class="user-body">
-                                                        <div class=" text-center">
-                                                            <a href="~/Home/EditProfileTeachers" class="btn btn-primary btn-block" role="button">معلومات الاستاذ</a>
-                                                        </div>
+                            <li class="user-body">
+                                <div class=" text-center">
+                                    <a href="~/Home/EditProfileTeachers" class="btn btn-primary btn-block" role="button">معلومات الاستاذ</a>
+                                </div>
 
-                                                    </li> }
+                            </li> }
 
-                                                else
-                                                { <li class="user-body">
-                                                        <div class="text-center">
+                        else
+                        { <li class="user-body">
+                                <div class="text-center">
 
-                                                            <a href="~/Home/CreateProfileTeachers" class="btn btn-primary btn-block" role="button">اضافة معلومات الاستاذ</a>
-                                                        </div>
+                                    <a href="~/Home/CreateProfileTeachers" class="btn btn-primary btn-block" role="button">اضافة معلومات الاستاذ</a>
+                                </div>
 
 
-                                                    </li>}
-                            
+                            </li>}
+
 
 
 

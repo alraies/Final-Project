@@ -51,6 +51,11 @@
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Messages Dropdown Menu -->
+
+                <li>
+                    <!--Partial Login-->
+                    @Html.Partial("_Login")
+                </li>
                 <li>
                     <img src="~/Content/dashboard/dist/img/img_avatar.png"
                          style="
@@ -62,11 +67,6 @@
                 margin-left:10px;
                 margin-top:3px" alt="User Image">
                 </li>
-                <li>
-                    <!--Partial Login-->
-                    @Html.Partial("_Login")
-                </li>
-
 
             </ul>
         </nav>

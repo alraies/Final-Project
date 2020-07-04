@@ -2118,6 +2118,7 @@
     <Content Include="Views\Shared\_Powers.cshtml" />
     <Content Include="Views\Account\EditAuthorityManagement.cshtml" />
     <Content Include="Views\Account\AuthorityManagement.cshtml" />
+    <Content Include="Views\Account\Register2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

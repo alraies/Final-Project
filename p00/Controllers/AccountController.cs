@@ -145,7 +145,39 @@ namespace WebApplication2.Controllers
             ViewBag.AccountType = new SelectList(db.Roles,"Name","Name");
             return View();
         }
+        public ActionResult Register2()
+        {
+            ViewBag.AccountType = new SelectList(db.Roles, "Name", "Name");
+            return View();
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Register2(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                ViewBag.AccountType = new SelectList(db.Roles, "Name", "Name");
+                var user = new ApplicationUser { UserName = model.Username, Email = model.Email, AccountType = model.AccountType };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
+                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    return RedirectToAction("Index", "Home");
+                }
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View();
+        }
         //
         // POST: /Account/Register
         [HttpPost]
@@ -272,7 +304,7 @@ namespace WebApplication2.Controllers
             string numbers = "0123456789";
             string BigLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             string Lowercaseletters = "abcdefghijklmnopqrstuvwxyz";
-            string Symbols = "!@#$%^&*_";
+            string Symbols = "@";
             Random objrandom = new Random();
             string passwordString = "";
             string strrandom = string.Empty;

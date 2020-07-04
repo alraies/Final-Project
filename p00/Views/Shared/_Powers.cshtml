@@ -8,185 +8,193 @@
     var UserID = User.Identity.GetUserId();
     var CurrentUser = db.Users.Where(a => a.Id == UserID).SingleOrDefault();
     var CurrentTeacher = db.UserToTeachers.Where(a => a.UserID == UserID).SingleOrDefault();
-    var currntcommiths = db.CommHeeMembers.Where(a => a.Teacherid == CurrentTeacher.TeacherID).SingleOrDefault();
-    var c1=new CommHee();
-    var c2=new  CommitHees();
-    if(currntcommiths!=null)
+    var currntcommiths = new CommHeeMembers();
+    if (CurrentTeacher != null)
     {
-        c1 = db.CommHees.Where(a => a.id == currntcommiths.CommHeeid).SingleOrDefault();
-        c2 = db.CommitHees.Where(a => a.id == c1.CommitHeesid).SingleOrDefault();
+        currntcommiths = db.CommHeeMembers.Where(a => a.Teacherid == CurrentTeacher.TeacherID).SingleOrDefault();
     }
-    if (User.IsInRole("Admins")) {
-<li class="nav-item has-treeview ">
-    <a href="" class="nav-link ">
-        <i class="nav-icon fas fa-award"></i>
-        <p>
-            <span>اللجان</span>
-            <i class="fas fa-angle-left right"></i>
-        </p>
-
-    </a>
-    <ul class="nav nav-treeview">
-
-        <li class="nav-item">
-            <a href="~/CommitHees/" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>اللجان</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="~/CommHees/" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>رؤساء اللجان</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="~/CommHeeMembers/" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>اعضاء اللجان</p>
-            </a>
-        </li>
-
-
-    </ul>
-</li>
-                <li class="nav-item has-treeview ">
-                    <a href="" class="nav-link ">
-                        <i class="nav-icon fas fa-file-archive"></i>
-                        <p>
-                            <span>الاستمارة</span>
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-
-                    </a>
-                    <ul class="nav nav-treeview">
-
-                        <li class="nav-item">
-                            <a href="~/topics/" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>الفقرات</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="~/sections/" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>المحاور</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="~/evaluationforms/" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>قائمة الاستمارات</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="~/Evaluationforms/LateForSubmission" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>الاساتذه المتاخرين</p>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
-
-
-                                <li class="nav-item">
-                                    <a href="~/Home/TeachersLists" class="nav-link">
-                                        <i class="nav-icon far fa-circle text-danger"></i>
-                                        <p class="text">قائمة الاساتذة</p>
-                                    </a>
-                                </li>
-                                                <li class="nav-item">
-                                                    <a href="~/Home/Assent" class="nav-link">
-                                                        <i class="nav-icon far fa-circle text-success"></i>
-                                                        <p>تقييم استاذ</p>
-                                                    </a>
-                                                </li>
-                                                                <li class="nav-item">
-                                                                    <a href="~/Teachers/listVacation/" class="nav-link">
-                                                                        <i class="nav-icon far fa-circle text-info"></i>
-                                                                        <p>تحديد اجازة</p>
-                                                                    </a>
-                                                                </li>
+    var c1 = new CommHee();
+    var c2 = new CommitHees();
+    if (CurrentTeacher != null)
+    {
+        if (currntcommiths != null)
+        {
+            c1 = db.CommHees.Where(a => a.id == currntcommiths.CommHeeid).SingleOrDefault();
+            c2 = db.CommitHees.Where(a => a.id == c1.CommitHeesid).SingleOrDefault();
+        }
     }
-    if(CurrentTeacher!=null)
+    if (User.IsInRole("admin"))
     {
         <li class="nav-item has-treeview ">
-    <a href="" class="nav-link ">
-        <i class="nav-icon fas fa-award"></i>
-        <p>
-            <span>الوثائق</span>
-            <i class="fas fa-angle-left right"></i>
-        </p>
+            <a href="" class="nav-link ">
+                <i class="nav-icon fas fa-award"></i>
+                <p>
+                    <span>اللجان</span>
+                    <i class="fas fa-angle-left right"></i>
+                </p>
 
-    </a>
-    <ul class="nav nav-treeview">
-
-        <li class="nav-item">
-            <a href="~/Home/TopicView/" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>رفع الوثائق</p>
             </a>
-        </li>
-        <li class="nav-item">
-            <a href="~/Home/DocumentsofTopic/" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>تعديل ورفع الوثائق</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="~/Home/RefuseTheDocument/" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>الوثائق المرفوضه</p>
-            </a>
-        </li>
+            <ul class="nav nav-treeview">
 
-
-    </ul>
-</li>
- <li class="nav-item has-treeview ">
-                    <a href="" class="nav-link ">
-                        <i class="nav-icon fas fa-file-archive"></i>
-                        <p>
-                            <span>تفاصيل الاستمارة</span>
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-
+                <li class="nav-item">
+                    <a href="~/CommitHees/" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>اللجان</p>
                     </a>
-                    <ul class="nav nav-treeview">
-
-                        <li class="nav-item">
-                            <a href="~/Home/DegreeOfAssessment/" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>الاستماره الحاليه</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="~/Home/ShowDegreesOfPreviousYears/" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>تفاصيل جميع التقيمات</p>
-                            </a>
-                        </li>
-
-                    </ul>
                 </li>
+                <li class="nav-item">
+                    <a href="~/CommHees/" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>رؤساء اللجان</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="~/CommHeeMembers/" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>اعضاء اللجان</p>
+                    </a>
+                </li>
+
+
+            </ul>
+        </li>
+        <li class="nav-item has-treeview ">
+            <a href="" class="nav-link ">
+                <i class="nav-icon fas fa-file-archive"></i>
+                <p>
+                    <span>الاستمارة</span>
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+
+            </a>
+            <ul class="nav nav-treeview">
+
+                <li class="nav-item">
+                    <a href="~/topics/" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>الفقرات</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="~/sections/" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>المحاور</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="~/evaluationforms/" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>قائمة الاستمارات</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="~/Evaluationforms/LateForSubmission" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>الاساتذه المتاخرين</p>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+
+
+        <li class="nav-item">
+            <a href="~/Home/TeachersLists" class="nav-link">
+                <i class="nav-icon far fa-circle text-danger"></i>
+                <p class="text">قائمة الاساتذة</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="~/Home/Assent" class="nav-link">
+                <i class="nav-icon far fa-circle text-success"></i>
+                <p>تقييم استاذ</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="~/Teachers/listVacation/" class="nav-link">
+                <i class="nav-icon far fa-circle text-info"></i>
+                <p>تحديد اجازة</p>
+            </a>
+        </li>
     }
-    if(currntcommiths!=null)
+    if (CurrentTeacher != null)
+    {
+        <li class="nav-item has-treeview ">
+            <a href="" class="nav-link ">
+                <i class="nav-icon fas fa-award"></i>
+                <p>
+                    <span>الوثائق</span>
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+
+            </a>
+            <ul class="nav nav-treeview">
+
+                <li class="nav-item">
+                    <a href="~/Home/TopicView/" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>رفع الوثائق</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="~/Home/DocumentsofTopic/" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>تعديل ورفع الوثائق</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="~/Home/RefuseTheDocument/" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>الوثائق المرفوضه</p>
+                    </a>
+                </li>
+
+
+            </ul>
+        </li>
+        <li class="nav-item has-treeview ">
+            <a href="" class="nav-link ">
+                <i class="nav-icon fas fa-file-archive"></i>
+                <p>
+                    <span>تفاصيل الاستمارة</span>
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+
+            </a>
+            <ul class="nav nav-treeview">
+
+                <li class="nav-item">
+                    <a href="~/Home/DegreeOfAssessment/" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>الاستماره الحاليه</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="~/Home/ShowDegreesOfPreviousYears/" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>تفاصيل جميع التقيمات</p>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+    }
+    if (currntcommiths != null)
     {
         <li class="nav-item">
             <a href="~/Home/Assent" class="nav-link">
-              <i class="nav-icon far fa-circle text-success"></i>
-                 <p>تقييم استاذ</p>
+                <i class="nav-icon far fa-circle text-success"></i>
+                <p>تقييم استاذ</p>
             </a>
         </li>
     }
-    if(c2.comitname=="رئيس القسم")
+    if (c2.comitname == "رئيس القسم")
     {
         <li class="nav-item">
             <a href="~/Home/TeachersLists" class="nav-link">
-             <i class="nav-icon far fa-circle text-danger"></i>
-              <p class="text">قائمة الاساتذة</p>
-               </a>
+                <i class="nav-icon far fa-circle text-danger"></i>
+                <p class="text">قائمة الاساتذة</p>
+            </a>
         </li>
     }
 }

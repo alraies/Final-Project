@@ -9,7 +9,7 @@ namespace p00.Models
     public class CommHee
     {
         public int id { get; set; }
-        [DisplayName("السنة الدراسية")]
+        [DisplayName("اسم اللجنة")]
         public string AcdYea { get; set; }
         [DisplayName("رئيس االلجنة")]
         public string head { get; set; }
