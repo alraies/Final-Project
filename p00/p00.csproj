@@ -1850,16 +1850,16 @@
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\TopicEVsController.cs" />
     <Compile Include="Controllers\TopicsController.cs" />
-    <Compile Include="Controllers\UserRolseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202007021126214_TestUpdate.cs" />
-    <Compile Include="Migrations\202007021126214_TestUpdate.Designer.cs">
-      <DependentUpon>202007021126214_TestUpdate.cs</DependentUpon>
+    <Compile Include="Migrations\202007050540328_addTopicIsAtivate.cs" />
+    <Compile Include="Migrations\202007050540328_addTopicIsAtivate.Designer.cs">
+      <DependentUpon>202007050540328_addTopicIsAtivate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CheckedTeachersViewModel.cs" />
     <Compile Include="Models\CheckSectionsViewModel.cs" />
     <Compile Include="Models\CommHee.cs" />
     <Compile Include="Models\CommHeeMembers.cs" />
@@ -2119,6 +2119,7 @@
     <Content Include="Views\Account\EditAuthorityManagement.cshtml" />
     <Content Include="Views\Account\AuthorityManagement.cshtml" />
     <Content Include="Views\Account\Register2.cshtml" />
+    <Content Include="Views\EvaluationForms\DeleteTheTeacher.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2142,8 +2143,8 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202007021126214_TestUpdate.resx">
-      <DependentUpon>202007021126214_TestUpdate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202007050540328_addTopicIsAtivate.resx">
+      <DependentUpon>202007050540328_addTopicIsAtivate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -11,7 +11,7 @@ using p00.Models;
 
 namespace p00.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class EvaluationFormsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -73,12 +73,16 @@ namespace p00.Controllers
                         {
                             if (item2.SectionsID == item.SectionsID)
                             {
-                                foreach (var item3 in R3)
+                                var top = db.Topics.Find(item2.TopicsID);
+                                if (top.isActivate == false)
                                 {
-                                    if (item3.Vacation==false) 
+                                    foreach (var item3 in R3)
                                     {
-                                        // lasit.Add(new TopicEV { EvaluationFormId = item.EvaluationFormID, SectionsId = item.SectionsID, TopicsId = item2.TopicsID, TeacherId = item3.Id });
-                                        db.TopicEVs.Add(new TopicEV { EvaluationFormId = item.EvaluationFormID, SectionsId = item.SectionsID, TopicsId = item2.TopicsID, TeacherId = item3.Id });
+                                        if (item3.Vacation == false)
+                                        {
+                                            // lasit.Add(new TopicEV { EvaluationFormId = item.EvaluationFormID, SectionsId = item.SectionsID, TopicsId = item2.TopicsID, TeacherId = item3.Id });
+                                            db.TopicEVs.Add(new TopicEV { EvaluationFormId = item.EvaluationFormID, SectionsId = item.SectionsID, TopicsId = item2.TopicsID, TeacherId = item3.Id });
+                                        }
                                     }
                                 }
                             }
@@ -86,6 +90,7 @@ namespace p00.Controllers
                     }
                 }
                 db.SaveChanges();
+                Session["message"] = "تم تفعيل الاستماره";
                 return RedirectToAction("Index");
             }
             else
@@ -410,5 +415,54 @@ namespace p00.Controllers
             Session["message"] = "تم نسخ الاستماره وضيفة عل تاريخ اليوم";
             return RedirectToAction("Index");
         }
-    }
+        public ActionResult DeleteTheTeacher()
+        {
+            if (Session["message"] != null)
+            {
+                ViewBag.Message = Session["message"].ToString();
+                Session["message"] = null;
+            }
+            var evalu = db.EvaluationForm.Where(a => a.iscurent == true).SingleOrDefault();
+            var R = from b in db.Teachers where b.Vacation==false
+                    select new
+                    {
+                        b.Id,
+                        b.FullName,
+                        b.University,
+                        b.College,
+                        b.Department,
+                        b.ScientificTitle,
+                        Checked = ((from ab in db.TopicEVs
+                                    where (ab.EvaluationFormId == evalu.id) & (ab.TeacherId == b.Id)
+                                    select ab).Count() > 0)
+                    };
+            var teacher =new List<CheckedTeachersViewModel>();
+            foreach (var item in R)
+            {
+                if (item.Checked)
+                {
+                    teacher.Add(new CheckedTeachersViewModel { Id = item.Id, FullName = item.FullName, University = item.University, College = item.College, Department = item.Department, ScientificTitle = item.ScientificTitle, Check = item.Checked });
+
+                }
+            }
+            return View(teacher);
+        }
+        public ActionResult DeleteTeacherTheTopicEV(int? id)
+        {
+            if(id==null)
+            {
+                return HttpNotFound();
+            }
+            var evalu = db.EvaluationForm.Where(a => a.iscurent == true).SingleOrDefault();
+            var topicEV = db.TopicEVs.Where(a => a.EvaluationFormId == evalu.id && a.TeacherId == id);
+            foreach (var item in topicEV)
+            {
+                db.TopicEVs.Remove(item);
+            }
+            db.SaveChanges();
+            Session["message"] = "تم حذف من الاستماره";
+            return RedirectToAction("DeleteTheTeacher");
+        }
+        }
+
 }

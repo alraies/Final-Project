@@ -126,8 +126,18 @@ namespace p00.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            var topicEV = db.TopicEVs.Where(a => a.TopicsId == id);
+           
             Topics topics = db.Topics.Find(id);
-            db.Topics.Remove(topics);
+            if (topicEV.Count() > 0)
+            {
+                topics.isActivate = true;
+                db.Entry(topics).State = EntityState.Modified;
+            }
+            else
+            {
+                db.Topics.Remove(topics);
+            }
             db.SaveChanges();
             return RedirectToAction("Index");
         }
