@@ -5,7 +5,10 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
+<script src="~/Scripts/EmployeeReport.js"></script>
 <h2>قوائم الاساتذه المشولين بالتقييم الاستماره الحاليه</h2>
+
+@*<button id="btnGenerate">loed</button>*@
 <table class="table">
     <tr>
         <th>
@@ -59,8 +62,9 @@
 </table>
 @if (ViewBag.Message != null)
 {
-<script type="text/javascript">
+    <script type="text/javascript">
         window.onload = function () {
             alert("@ViewBag.Message");
         };
-</script>}
+    </script>
+}

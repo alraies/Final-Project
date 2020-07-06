@@ -40,14 +40,15 @@ namespace p00.Controllers
             //            b.SectionsID,
             //        };
             var te = db.TopicEVs.Where(a => a.EvaluationFormId == evaluationForm.id);
-            if (evaluationForm.iscurent==true&&te.Count()<=0)
+            if (evaluationForm.iscurent == true && te.Count() <= 0)
             {
                 var R = db.EvaluaationFormtoSections.Where(a => a.EvaluationFormID == evaluationForm.id);
-                var R2 = from b in db.SectionstoTopics select new
-                {
-                    b.TopicsID,
-                    b.SectionsID,
-                };
+                var R2 = from b in db.SectionstoTopics
+                         select new
+                         {
+                             b.TopicsID,
+                             b.SectionsID,
+                         };
                 var R3 = from b in db.Teachers
                          select new
                          {
@@ -95,11 +96,11 @@ namespace p00.Controllers
             }
             else
             {
-                Session["message"]=" هذا الاستماره مفعله سابقا ذا كنت تريد تفعيل نفس الاستماره يجب ان تعمل نسخه لها وتفعيلها";
+                Session["message"] = " هذا الاستماره مفعله سابقا ذا كنت تريد تفعيل نفس الاستماره يجب ان تعمل نسخه لها وتفعيلها";
             }
             return RedirectToAction("Index");
         }
-          
+
         // GET: EvaluationForms/Details/5
         public ActionResult Details(int? id)
         {
@@ -183,14 +184,14 @@ namespace p00.Controllers
                         b.SectionName,
                         b.Description,
                         b.TotalPoints,
-                       
+
                         Checked = ((from ab in db.EvaluaationFormtoSections
                                     where (ab.EvaluationFormID == id) & (ab.SectionsID == b.Id)
                                     select ab).Count() > 0)
                     };
             var Myviewmodel = new EvaluationFormViewModel();
             Myviewmodel.id = id.Value;
-            Myviewmodel.year =evaluationForm.year;
+            Myviewmodel.year = evaluationForm.year;
             Myviewmodel.iscurent = evaluationForm.iscurent;
 
 
@@ -214,9 +215,9 @@ namespace p00.Controllers
         {
             //if (ModelState.IsValid)
             //{
-                var Mysection = db.EvaluationForm.Find(evaluationForm.id);
-                Mysection.year = evaluationForm.year;
-                Mysection.iscurent = evaluationForm.iscurent;
+            var Mysection = db.EvaluationForm.Find(evaluationForm.id);
+            Mysection.year = evaluationForm.year;
+            Mysection.iscurent = evaluationForm.iscurent;
 
 
             foreach (var item in db.EvaluaationFormtoSections)
@@ -246,7 +247,7 @@ namespace p00.Controllers
                 {
                     foreach (var item2 in db.EvaluaationFormtoSections)
                     {
-                        if (item.Id == item2.SectionsID&&evaluationForm.id==item2.EvaluationFormID)
+                        if (item.Id == item2.SectionsID && evaluationForm.id == item2.EvaluationFormID)
                         {
                             A = false;
                         }
@@ -260,8 +261,8 @@ namespace p00.Controllers
 
 
             db.SaveChanges();
-                return RedirectToAction("Index");
-          //  }
+            return RedirectToAction("Index");
+            //  }
             return View(evaluationForm);
         }
 
@@ -322,29 +323,29 @@ namespace p00.Controllers
                                     select ab).Count() <= 0)
                     };
             var teacher = new List<Teacher>();
-            foreach(var item in R)
+            foreach (var item in R)
             {
-                if (item.Checked&&item.Vacation==false)
-                    teacher.Add(new Teacher {Id=item.Id,FullName=item.FullName,University=item.University,College=item.College,Department=item.Department,ScientificTitle=item.ScientificTitle});
+                if (item.Checked && item.Vacation == false)
+                    teacher.Add(new Teacher { Id = item.Id, FullName = item.FullName, University = item.University, College = item.College, Department = item.Department, ScientificTitle = item.ScientificTitle });
             }
             return View(teacher);
         }
 
         public ActionResult RequestForEvaluation(int? id)
         {
-            if(id==null)
+            if (id == null)
             {
                 return HttpNotFound();
             }
             var evalu = db.EvaluationForm.Where(a => a.iscurent == true).SingleOrDefault();
             var evaltosa = db.EvaluaationFormtoSections.Where(a => a.EvaluationFormID == evalu.id);
             var topic = db.SectionstoTopics.ToList();
-            foreach (var item in evaltosa )
-            {   
-                foreach(var item2 in topic)
+            foreach (var item in evaltosa)
+            {
+                foreach (var item2 in topic)
                 {
-                    if(item.SectionsID==item2.SectionsID)
-                    db.TopicEVs.Add(new TopicEV { EvaluationFormId = evalu.id, SectionsId = item.SectionsID, TopicsId = item2.TopicsID, TeacherId = id.Value });
+                    if (item.SectionsID == item2.SectionsID)
+                        db.TopicEVs.Add(new TopicEV { EvaluationFormId = evalu.id, SectionsId = item.SectionsID, TopicsId = item2.TopicsID, TeacherId = id.Value });
                 }
             }
             db.SaveChanges();
@@ -357,7 +358,7 @@ namespace p00.Controllers
             {
                 return HttpNotFound();
             }
-            
+
             var evalu = db.EvaluationForm.Where(a => a.iscurent == true).SingleOrDefault();
             var evaltosa = db.EvaluaationFormtoSections.Where(a => a.EvaluationFormID == evalu.id);
             var topic = db.SectionstoTopics.ToList();
@@ -382,13 +383,13 @@ namespace p00.Controllers
                 {
                     if (item.SectionsID == item2.SectionsID)
                     {
-                        foreach(var item3 in R2)
+                        foreach (var item3 in R2)
                         {
-                            if(item3.Checked&&item3.Vacation==false)
-                            db.TopicEVs.Add(new TopicEV { EvaluationFormId = evalu.id, SectionsId = item.SectionsID, TopicsId = item2.TopicsID, TeacherId =item3.Id });
+                            if (item3.Checked && item3.Vacation == false)
+                                db.TopicEVs.Add(new TopicEV { EvaluationFormId = evalu.id, SectionsId = item.SectionsID, TopicsId = item2.TopicsID, TeacherId = item3.Id });
                         }
-                    }    
-                       
+                    }
+
                 }
             }
             db.SaveChanges();
@@ -405,11 +406,11 @@ namespace p00.Controllers
             var evalutiontosections = db.EvaluaationFormtoSections.Where(a => a.EvaluationFormID == evaluation.id);
             var lastev = db.EvaluationForm.ToList();
             int x = lastev[lastev.Count() - 1].id;
-            db.EvaluationForm.Add(new EvaluationForm {id=x+1,year=DateTime.Now,iscurent=true});
-           
-            foreach(var item in evalutiontosections)
+            db.EvaluationForm.Add(new EvaluationForm { id = x + 1, year = DateTime.Now, iscurent = true });
+
+            foreach (var item in evalutiontosections)
             {
-                db.EvaluaationFormtoSections.Add(new EvaluaationFormtoSections{EvaluationFormID=x+1,SectionsID=item.SectionsID });
+                db.EvaluaationFormtoSections.Add(new EvaluaationFormtoSections { EvaluationFormID = x + 1, SectionsID = item.SectionsID });
             }
             db.SaveChanges();
             Session["message"] = "تم نسخ الاستماره وضيفة عل تاريخ اليوم";
@@ -423,7 +424,8 @@ namespace p00.Controllers
                 Session["message"] = null;
             }
             var evalu = db.EvaluationForm.Where(a => a.iscurent == true).SingleOrDefault();
-            var R = from b in db.Teachers where b.Vacation==false
+            var R = from b in db.Teachers
+                    where b.Vacation == false
                     select new
                     {
                         b.Id,
@@ -436,7 +438,7 @@ namespace p00.Controllers
                                     where (ab.EvaluationFormId == evalu.id) & (ab.TeacherId == b.Id)
                                     select ab).Count() > 0)
                     };
-            var teacher =new List<CheckedTeachersViewModel>();
+            var teacher = new List<CheckedTeachersViewModel>();
             foreach (var item in R)
             {
                 if (item.Checked)
@@ -449,7 +451,7 @@ namespace p00.Controllers
         }
         public ActionResult DeleteTeacherTheTopicEV(int? id)
         {
-            if(id==null)
+            if (id == null)
             {
                 return HttpNotFound();
             }
@@ -463,6 +465,6 @@ namespace p00.Controllers
             Session["message"] = "تم حذف من الاستماره";
             return RedirectToAction("DeleteTheTeacher");
         }
-        }
-
+        
+    }
 }
