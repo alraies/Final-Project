@@ -19,7 +19,7 @@ namespace p00.Controllers
         // GET: CommHeeMembers
         public ActionResult Index()
         {
-            var commHeeMembers = db.CommHeeMembers.Include(c => c.CommHee).Include(c => c.Teacher);
+            var commHeeMembers = db.CommHeeMembers.Include(c => c.CommitHees).Include(c => c.Teacher);
             return View(commHeeMembers.ToList());
         }
 
@@ -41,7 +41,7 @@ namespace p00.Controllers
         // GET: CommHeeMembers/Create
         public ActionResult Create()
         {
-            ViewBag.CommHeeid = new SelectList(db.CommHees, "id", "AcdYea");
+            ViewBag.CommitHeesid = new SelectList(db.CommitHees, "id", "comitname");
           //  ViewBag.CommitHeesid = new SelectList(db.CommitHees, "id", "comitname");
             ViewBag.Teacherid = new SelectList(db.Teachers, "Id", "FullName");
             return View();
@@ -52,7 +52,7 @@ namespace p00.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Role,CommHeeid,Teacherid")] CommHeeMembers commHeeMembers)
+        public ActionResult Create([Bind(Include = "Id,CommitHeesid,Teacherid")] CommHeeMembers commHeeMembers)
         {
             if (ModelState.IsValid)
             {
@@ -61,7 +61,7 @@ namespace p00.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CommHeeid = new SelectList(db.CommHees, "id", "AcdYea", commHeeMembers.CommHeeid);
+            ViewBag.CommitHeesid = new SelectList(db.CommHees, "id", "comitname", commHeeMembers.CommitHees);
             ViewBag.Teacherid = new SelectList(db.Teachers, "Id", "FullName", commHeeMembers.Teacherid);
             return View(commHeeMembers);
         }
@@ -78,7 +78,7 @@ namespace p00.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CommHeeid = new SelectList(db.CommHees, "id", "AcdYea", commHeeMembers.CommHeeid);
+            ViewBag.CommitHeesid = new SelectList(db.CommitHees, "id", "comitname", commHeeMembers.CommitHeesid);
             ViewBag.Teacherid = new SelectList(db.Teachers, "Id", "FullName", commHeeMembers.Teacherid);
             return View(commHeeMembers);
         }
@@ -88,7 +88,7 @@ namespace p00.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Role,CommHeeid,Teacherid")] CommHeeMembers commHeeMembers)
+        public ActionResult Edit([Bind(Include = "Id,CommitHeesid,Teacherid")] CommHeeMembers commHeeMembers)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace p00.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CommHeeid = new SelectList(db.CommHees, "id", "AcdYea", commHeeMembers.CommHeeid);
+            ViewBag.CommitHeesid = new SelectList(db.CommitHees, "id", "comitname", commHeeMembers.CommitHeesid);
             ViewBag.Teacherid = new SelectList(db.Teachers, "Id", "FullName", commHeeMembers.Teacherid);
             return View(commHeeMembers);
         }

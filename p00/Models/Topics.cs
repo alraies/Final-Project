@@ -25,6 +25,8 @@ namespace p00.Models
        
         [Display(Name = "وزن الوثيقة")]
         public int DocPoints { get; set; }
+        [Required]
+        [Display(Name = "فعالة ؟")]
         public bool isActivate { get; set; }
         [Required]
         [Display(Name = "اللجنه")]

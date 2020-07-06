@@ -131,7 +131,7 @@ namespace WebApplication2.Controllers
                     var document = db.Documents.Where(a=>a.TopicEVId==topicEV.Id);
                     topicEV.Nameproved = teacher.FullName;
                     var Currentcommit = db.CommHeeMembers.Where(a => a.Teacherid == CurrentTeacher.TeacherID).SingleOrDefault();
-                    var Currentcommit2 = db.CommHees.Where(a => a.id == Currentcommit.CommHeeid).SingleOrDefault();
+                    var Currentcommit2 = db.CommHees.Where(a => a.id == Currentcommit.CommitHeesid).SingleOrDefault();
                     var Currentcommit3 = db.CommitHees.Where(a => a.id == Currentcommit2.CommitHeesid).SingleOrDefault();
                     if (document!= null)
                     {
@@ -164,7 +164,7 @@ namespace WebApplication2.Controllers
                     var CurrentTeacher = db.UserToTeachers.Where(a => a.UserID == UserID).SingleOrDefault();
                     var teacher = db.Teachers.Find(CurrentTeacher.TeacherID);
                     var Currentcommit = db.CommHeeMembers.Where(a => a.Teacherid == CurrentTeacher.TeacherID).SingleOrDefault();
-                    var Currentcommit2 = db.CommHees.Where(a => a.id == Currentcommit.CommHeeid).SingleOrDefault();
+                    var Currentcommit2 = db.CommHees.Where(a => a.id == Currentcommit.CommitHeesid).SingleOrDefault();
                     var Currentcommit3 = db.CommitHees.Where(a => a.id == Currentcommit2.CommitHeesid).SingleOrDefault();
                     var topics = db.Topics.Find(topicEV.TopicsId);
                     topicEV.Nameproved = teacher.FullName;

@@ -1853,9 +1853,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202007050540328_addTopicIsAtivate.cs" />
-    <Compile Include="Migrations\202007050540328_addTopicIsAtivate.Designer.cs">
-      <DependentUpon>202007050540328_addTopicIsAtivate.cs</DependentUpon>
+    <Compile Include="Migrations\202007061351520_AddIsActivateTopic.cs" />
+    <Compile Include="Migrations\202007061351520_AddIsActivateTopic.Designer.cs">
+      <DependentUpon>202007061351520_AddIsActivateTopic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007062156386_EditCommittees.cs" />
+    <Compile Include="Migrations\202007062156386_EditCommittees.Designer.cs">
+      <DependentUpon>202007062156386_EditCommittees.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -2143,8 +2147,11 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202007050540328_addTopicIsAtivate.resx">
-      <DependentUpon>202007050540328_addTopicIsAtivate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202007061351520_AddIsActivateTopic.resx">
+      <DependentUpon>202007061351520_AddIsActivateTopic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007062156386_EditCommittees.resx">
+      <DependentUpon>202007062156386_EditCommittees.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

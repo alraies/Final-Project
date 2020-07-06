@@ -24,15 +24,11 @@
                 <table  id="example1" class="table table-hover text-nowrap">
                     <thead>
                         <tr class="warning">
-                            <th>
-                                @Html.DisplayNameFor(model => model.CommitHees.comitname)
-                            </th>
+                         
                             <th>
                                 @Html.DisplayNameFor(model => model.AcdYea)
                             </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.head)
-                            </th>
+                          
                             <th></th>
                         </tr>
                     </thead>
@@ -40,15 +36,11 @@
                         @foreach (var item in Model)
                         {
                         <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CommitHees.comitname)
-                            </td>
+                            
                             <td>
                                 @Html.DisplayFor(modelItem => item.AcdYea)
                             </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.head)
-                            </td>
+                          
                             <td>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-success"> @Html.ActionLink("تعديل", "Edit", new { id = item.id })</button>

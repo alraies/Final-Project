@@ -21,6 +21,6 @@ namespace p00.Models
         public bool isActive { get; set; }
 
         public ICollection<Topics> Topics { get; set; }
-        public ICollection<CommHee> CommHee { get; set; }
+        public ICollection<CommHeeMembers> CommHeeMembers { get; set; }
     }
 }

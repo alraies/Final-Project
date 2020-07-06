@@ -22,13 +22,13 @@
 
     if (Currentcommit != null)
     {
-        var Currentcommit2 = db.CommHees.Where(a => a.id == Currentcommit.CommHeeid).SingleOrDefault();
-        var Currentcommit3 = db.CommitHees.Where(a => a.id == Currentcommit2.CommitHeesid).SingleOrDefault();
+        var Currentcommit2 = db.CommitHees.Where(a => a.id == Currentcommit.CommitHeesid).SingleOrDefault();
+       
         <div class="card col-lg-12">
             @*<h1>الحاسبات</h1>*@
-            <h1 class="card-header-tabs">@Currentcommit3.comitname</h1>
+            <h1 class="card-header-tabs">@Currentcommit2.comitname</h1>
             <div>
-                <p class="card-body">@Currentcommit3.comitDecipt .</p>
+                <p class="card-body">@Currentcommit2.comitDecipt .</p>
             </div>
            
            
@@ -43,8 +43,8 @@
         foreach (var item in Teacher)
         {
             // var item3 = item.TopicEVs;
-            var ta2 = db.TopicEVs.Where(a => a.TeacherId == item.Id & a.Approved == false&a.Topics.CommitHeesID==Currentcommit3.id);
-            var ta3 = Model.Where(a => a.TeacherId == item.Id & a.Approved == false & a.Topics.CommitHeesID == Currentcommit3.id);
+            var ta2 = db.TopicEVs.Where(a => a.TeacherId == item.Id & a.Approved == false&a.Topics.CommitHeesID==Currentcommit2.id);
+            var ta3 = Model.Where(a => a.TeacherId == item.Id & a.Approved == false & a.Topics.CommitHeesID == Currentcommit2.id);
             if (item.Id!= CurrentTeacher.TeacherID&&ta2.Count()>0&&ta3.Count()>0)
             {
 
@@ -62,7 +62,7 @@
         @foreach (var item2 in Model)
         {
             var document = db.Documents.Where(a => a.TopicEVId == item2.Id);
-            if (item2.Topics.CommitHeesID == Currentcommit3.id && item2.Approved == false && item2.TeacherId == item.Id)
+            if (item2.Topics.CommitHeesID == Currentcommit2.id && item2.Approved == false && item2.TeacherId == item.Id)
             {
                 <div class="col-md-3 card card-warning">
                     <h2 class="card-header">محور @Html.DisplayFor(modelItem => item2.Sections.SectionName)</h2>

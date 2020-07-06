@@ -13,14 +13,14 @@
     {
         currntcommiths = db.CommHeeMembers.Where(a => a.Teacherid == CurrentTeacher.TeacherID).SingleOrDefault();
     }
-    var c1 = new CommHee();
-    var c2 = new CommitHees();
+    var c1 = new CommitHees();
+  
     if (CurrentTeacher != null)
     {
         if (currntcommiths != null)
         {
-            c1 = db.CommHees.Where(a => a.id == currntcommiths.CommHeeid).SingleOrDefault();
-            c2 = db.CommitHees.Where(a => a.id == c1.CommitHeesid).SingleOrDefault();
+            c1 = db.CommitHees.Where(a => a.id == currntcommiths.CommitHeesid).SingleOrDefault();
+           
         }
     }
     if (User.IsInRole("admin"))
@@ -39,15 +39,10 @@
                 <li class="nav-item">
                     <a href="~/CommitHees/" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>اللجان</p>
+                        <p>قائمة اللجان</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="~/CommHees/" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>رؤساء اللجان</p>
-                    </a>
-                </li>
+                
                 <li class="nav-item">
                     <a href="~/CommHeeMembers/" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
@@ -188,7 +183,7 @@
             </a>
         </li>
     }
-    if (c2.comitname == "رئيس القسم")
+    if (c1.comitname == "رئيس القسم")
     {
         <li class="nav-item">
             <a href="~/Home/TeachersLists" class="nav-link">
