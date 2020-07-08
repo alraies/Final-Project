@@ -1,29 +1,33 @@
 ﻿@model IEnumerable<p00.Models.EvaluationForm>
 
 @{
-    ViewBag.Title = "ShowDegreesOfPreviousYears";
+    ViewBag.Title = "التقييمات السابقة";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<h2>تقيمات</h2>
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.year)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.year)
-        </td>
-        <td>
-            @Html.ActionLink("عرض التقييم", "ShowDegreesOfPrevious", new { id=item.id })
-        </td>
-    </tr>
-}
-
-</table>
+<h2>تقييمات</h2>
+<div class="card center-block">
+    <table id="example1" class="table table-bordered table-hover table-warning">
+        <thead class="bg-warning">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.year)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.year)
+                    </td>
+                    <td>
+                        @Html.ActionLink("عرض التقييم", "ShowDegreesOfPrevious", new { id = item.id }, htmlAttributes: new { @class = "btn btn-primary" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

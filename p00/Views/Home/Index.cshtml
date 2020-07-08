@@ -112,19 +112,37 @@
                                     </div>
                                     <div id="collapseOne" class="panel-collapse collapse in">
                                         <div class="card-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                                            3
-                                            wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
-                                            laborum
-                                            eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee
-                                            nulla
-                                            assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
-                                            nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
-                                            beer
-                                            farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
-                                            labore sustainable VHS.
+                                            <div class="row">
+
+
+
+                                                <div class="col-sm-2">
+                                                    <a href="~/Content/dashboard/dist/img/PDFtoJPG.me-1.jpg" data-toggle="lightbox" data-gallery="gallery">
+                                                        <img src="~/Content/dashboard/dist/img/PDFtoJPG.me-1.jpg" class="img-fluid mb-2" alt="وثيقة" />
+                                                    </a>
+
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <a href="~/Content/dashboard/dist/img/PDFtoJPG.me-2.jpg" data-toggle="lightbox" data-gallery="gallery">
+                                                        <img src="~/Content/dashboard/dist/img/PDFtoJPG.me-2.jpg" class="img-fluid mb-2" alt="وثيقة" />
+                                                    </a>
+
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <a href="~/Content/dashboard/dist/img/PDFtoJPG.me-3.jpg" data-toggle="lightbox" data-gallery="gallery">
+                                                        <img src="~/Content/dashboard/dist/img/PDFtoJPG.me-3.jpg" class="img-fluid mb-2" alt="وثيقة" />
+                                                    </a>
+
+                                                </div>
+
+
+
+
+                                            </div>
+                                           
                                         </div>
                                     </div>
+                                   
                                 </div>
                                 <div class="card card-danger">
                                     <div class="card-header">
@@ -298,167 +316,187 @@
 
     if (User.IsInRole("admin"))
     {<!-- Main content -->
-        <section class="content">
-            <!-- Small boxes (Stat box) -->
-            <div class="row">
-                @if (CurrentTeacher != null)
-                {
-                    <div class="col-lg-3 col-xs-6">
-                        <!-- small box -->
-                        <div class="small-box bg-info">
-                            <div class="inner">
-                                <h4>
-                                    تعديل المعلومات<h4>
-                                        <p>جميع المعلومات المطلوبة</p>
-                            </div>
-                            <div class="icon">
-
-
-                            </div>
-                            <a href="~/Home/EditProfileTeachers" class="small-box-footer">تعديل <i class="fa fa-arrow-circle-left"></i></a>
-                        </div>
-                    </div><!-- ./col -->
-                }
-                else
-                {
-                    <div class="col-lg-3 col-xs-6">
-                        <!-- small box -->
-                        <div class="small-box bg-info">
-                            <div class="inner">
-                                <h4>
-                                    اضافة المعلومات<h4>
-                                        <p>جميع المعلومات المطلوبة</p>
-                            </div>
-                            <div class="icon">
-
-
-                            </div>
-                            <a href="~/Home/CreateProfileTeachers" class="small-box-footer">اضافة <i class="fa fa-arrow-circle-left"></i></a>
-                        </div>
-                    </div><!-- ./col -->
-                }
-
-                <div class="col-lg-3 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-green">
-                        <div class="inner">
-                            <h4>
-                                اضافة الاساتذة<h4>
-                                    <p>اضافتهم للدخول ضمن عملة التقييم</p>
-                        </div>
-                        <div class="icon">
-
-
-                        </div>
-                        <a href="~/EvaluationForms" class="small-box-footer">تفعيل <i class="fa fa-arrow-circle-left"></i></a>
+<section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        @if (CurrentTeacher != null)
+        {
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h4>
+                            تعديل المعلومات<h4>
+                                <p>جميع المعلومات المطلوبة</p>
                     </div>
-                </div><!-- ./col -->
-                <div class="col-lg-3 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-yellow">
-                        <div class="inner">
-                            <h4>
-                                الصلاحيات <h4>
-                                    <p>ادارة الصلاحيات الخاصة بالمستخدمين</p>
-                        </div>
-                        <div class="icon">
+                    <div class="icon">
 
-                        </div>
-                        <a href="~/Account/AuthorityManagement" class="small-box-footer"> ذهاب <i class="fa fa-arrow-circle-left"></i></a>
+
                     </div>
-                </div><!-- ./col -->
-
-                <div class="col-lg-3 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-red">
-                        <div class="inner">
-                            <h4>
-                                انشاء حساب<h4>
-                                    <p>انشاء حسابات للجان والاساتذة</p>
-                        </div>
-                        <div class="icon">
-
-
-                        </div>
-                        <a href="~/Account/Register" class="small-box-footer">انشاء <i class="fa fa-arrow-circle-left"></i></a>
-                    </div>
-                </div><!-- ./col -->
-
-            </div><!-- /.row -->
-            <div class="col-lg-12 col-xs-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">دليل التقييم للمستخدمين</h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                        <div id="accordion">
-                            <!-- we are adding the .class so bootstrap.js collapse plugin detects it -->
-                            <div class="card card-primary">
-                                <div class="card-header">
-                                    <h4 class="card-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                                            الاستمارة الحالية
-
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="collapseOne" class="panel-collapse collapse in">
-                                    <div class="card-body">
-                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                                        3
-                                        wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
-                                        laborum
-                                        eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee
-                                        nulla
-                                        assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
-                                        nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
-                                        beer
-                                        farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
-                                        labore sustainable VHS.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card card-danger">
-                                <div class="card-header">
-                                    <h4 class="card-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                                            ارشادات رفع الوثائق
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="collapseTwo" class="panel-collapse collapse">
-                                    <div class="card-body">
-                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                                        3
-                                        wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
-                                        laborum
-                                        eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee
-                                        nulla
-                                        assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
-                                        nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
-                                        beer
-                                        farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
-                                        labore sustainable VHS.
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- /.card-body -->
+                    <a href="~/Home/EditProfileTeachers" class="small-box-footer">تعديل <i class="fa fa-arrow-circle-left"></i></a>
                 </div>
-                <!-- /.card -->
             </div><!-- ./col -->
-            <!-- Main row -->
-        </section>}
+
+        }
+        else
+        {
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h4>
+                            اضافة المعلومات<h4>
+                                <p>جميع المعلومات المطلوبة</p>
+                    </div>
+                    <div class="icon">
+
+
+                    </div>
+                    <a href="~/Home/CreateProfileTeachers" class="small-box-footer">اضافة <i class="fa fa-arrow-circle-left"></i></a>
+                </div>
+            </div><!-- ./col -->
+        }
+
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h4>
+                        اضافة الاساتذة<h4>
+                            <p>اضافتهم للدخول ضمن عملة التقييم</p>
+                </div>
+                <div class="icon">
+
+
+                </div>
+                <a href="~/EvaluationForms" class="small-box-footer">تفعيل <i class="fa fa-arrow-circle-left"></i></a>
+            </div>
+        </div><!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h4>
+                        الصلاحيات <h4>
+                            <p>ادارة الصلاحيات الخاصة بالمستخدمين</p>
+                </div>
+                <div class="icon">
+
+                </div>
+                <a href="~/Account/AuthorityManagement" class="small-box-footer"> ذهاب <i class="fa fa-arrow-circle-left"></i></a>
+            </div>
+        </div><!-- ./col -->
+
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-red">
+                <div class="inner">
+                    <h4>
+                        انشاء حساب<h4>
+                            <p>انشاء حسابات للجان والاساتذة</p>
+                </div>
+                <div class="icon">
+
+
+                </div>
+                <a href="~/Account/Register" class="small-box-footer">انشاء <i class="fa fa-arrow-circle-left"></i></a>
+            </div>
+        </div><!-- ./col -->
+
+    </div><!-- /.row -->
+    <div class="col-lg-12 col-xs-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">دليل التقييم للمستخدمين</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <div id="accordion">
+                    <!-- we are adding the .class so bootstrap.js collapse plugin detects it -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h4 class="card-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                    الاستمارة الحالية
+
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in">
+                            <div class="card-body">
+                                <div class="row">
+
+
+
+                                    <div class="col-sm-2">
+                                        <a href="~/Content/dashboard/dist/img/PDFtoJPG.me-1.jpg" data-toggle="lightbox" data-gallery="gallery">
+                                            <img src="~/Content/dashboard/dist/img/PDFtoJPG.me-1.jpg" class="img-fluid mb-2" alt="وثيقة" />
+                                        </a>
+
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <a href="~/Content/dashboard/dist/img/PDFtoJPG.me-2.jpg" data-toggle="lightbox" data-gallery="gallery">
+                                            <img src="~/Content/dashboard/dist/img/PDFtoJPG.me-2.jpg" class="img-fluid mb-2" alt="وثيقة" />
+                                        </a>
+
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <a href="~/Content/dashboard/dist/img/PDFtoJPG.me-3.jpg" data-toggle="lightbox" data-gallery="gallery">
+                                            <img src="~/Content/dashboard/dist/img/PDFtoJPG.me-3.jpg" class="img-fluid mb-2" alt="وثيقة" />
+                                        </a>
+
+                                    </div>
+
+
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card card-danger">
+                        <div class="card-header">
+                            <h4 class="card-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                    ارشادات رفع الوثائق
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse">
+                            <div class="card-body">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                                3
+                                wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
+                                laborum
+                                eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee
+                                nulla
+                                assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
+                                nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
+                                beer
+                                farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
+                                labore sustainable VHS.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div><!-- ./col -->
+    <!-- Main row -->
+   
+</section>}
     else
+       if(CurrentUser!=null)
     {
         <!-- Main content -->
         <section class="content">
             <!-- Small boxes (Stat box) -->
             <div class="row">
-                @if (CurrentUser != null)
+                @if (CurrentTeacher != null)
                 {
                     <div class="col-lg-3 col-xs-6">
                         <!-- small box -->

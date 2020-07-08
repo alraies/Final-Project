@@ -12,12 +12,12 @@
 <h2>@ViewBag.Title</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+  <button class="btn btn-s" >  @Html.ActionLink("اضافة", "Create")</button>
 </p>
 
-<table id="example1" class="table table-bordered table-hover">
+<table id="example1" class="table table-bordered table-hover table-warning">
     <thead>
-        <tr class="bg-info">
+        <tr class="bg-warning">
             <th>
                 @Html.DisplayNameFor(model => model.year)
             </th>
@@ -42,7 +42,7 @@
                 <td>
                     <button type="button" class="btn btn-outline-success">   @Html.ActionLink("اضافة المحاور", "Edit", new { id = item.id }) </button>
                     <button type="button" class="btn btn-outline-success">    @Html.ActionLink("التفاصيل", "Details", new { id = item.id })  </button>
-                    <button type="button" class="btn btn-outline-danger">   @Html.ActionLink("حذف", "Delete", new { id = item.id }) </button>
+                    <button type="button" class="btn btn-outline-danger">   @Html.ActionLink("حذف الاستمارة", "Delete", new { id = item.id }) </button>
                     <button type="button" class="btn btn-outline-success">     @Html.ActionLink("اضافة بيانات الاساتذة للاستمارة", "into", new { id = item.id }) </button>
                     <button type="button" class="btn btn-outline-warning">   @Html.ActionLink("نسخ الاستماره", "CopyEvaluation", new { id = item.id }) </button>
 

@@ -14,13 +14,13 @@
         currntcommiths = db.CommHeeMembers.Where(a => a.Teacherid == CurrentTeacher.TeacherID).SingleOrDefault();
     }
     var c1 = new CommitHees();
-  
+
     if (CurrentTeacher != null)
     {
         if (currntcommiths != null)
         {
             c1 = db.CommitHees.Where(a => a.id == currntcommiths.CommitHeesid).SingleOrDefault();
-           
+
         }
     }
     if (User.IsInRole("admin"))
@@ -42,7 +42,7 @@
                         <p>قائمة اللجان</p>
                     </a>
                 </li>
-                
+
                 <li class="nav-item">
                     <a href="~/CommHeeMembers/" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
@@ -90,6 +90,7 @@
                 </li>
 
             </ul>
+
         </li>
 
 
@@ -111,6 +112,20 @@
                 <p>تحديد اجازة</p>
             </a>
         </li>
+        <li class="nav-item">
+            <a href="~/Reports/ReportViewer.aspx" class="nav-link">
+                <i class="nav-icon far fa-circle text-info"></i>
+                <p>التقرير السنوي للتقييم</p>
+            </a>
+        </li>
+       
+        <li class="nav-item">
+            <a href="~/EvaluationForms/DeleteTheTeacher" class="nav-link">
+                <i class="nav-icon far fa-circle text-danger"></i>
+                <p>حذف استاذ من الاستمارة </p>
+            </a>
+        </li>
+
     }
     if (CurrentTeacher != null)
     {
@@ -174,7 +189,7 @@
             </ul>
         </li>
     }
-    if (currntcommiths != null)
+    if (currntcommiths != null && CurrentTeacher!=null)
     {
         <li class="nav-item">
             <a href="~/Home/Assent" class="nav-link">

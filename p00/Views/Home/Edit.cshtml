@@ -120,42 +120,49 @@
 
                     }
                 }
+                @if (document.Count() > 0)
+                {
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Points, "الدرجة", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @{
+                                var max = Model.Topics.TotalPoints;
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Points, "الدرجة", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @{
-                            var max = Model.Topics.TotalPoints;
-
-                            <div class="col-sm-6">
-                                @Html.EditorFor(model => model.Points, new
-                           {
-                               htmlAttributes = new
+                                <div class="col-sm-6">
+                                    @Html.EditorFor(model => model.Points, new
                                {
-                                   type = "range",  min = "1",max = max,onChange= "rangeSlide(this.value)"
-                               }
-                           })
-       <span id="rangevalue">0</span>
+                                   htmlAttributes = new
+                                   {
+                                       type = "range",
+                                            min = "1",
+                                            max = max,
+                                            onChange = "rangeSlide(this.value)"
+                                   }
+                               })
+                                    <span id="rangevalue">0</span>
 
 
-                            </div>
+                                </div>
 
-                            @Html.ValidationMessageFor(model => model.Points, "", new { @class = "text-danger" })
-                            <h3></h3>
-                        }
+                                @Html.ValidationMessageFor(model => model.Points, "", new { @class = "text-danger" })
+                                <h3></h3>
+                            }
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        @*@Html.ActionLink("موافقه", "Assent", new { id = true }, new { @class = "btn btn-default" })
-                            @Html.ActionLink("رفض", "Assent", new { id = false }, new { @class = "btn btn-default" })*@
-                        <input type="submit" value="موافقه" name="submitButton" class="btn btn-outline-success" />
-                        <input type="submit" value="رفض" name="submitButton" class="btn btn-outline-danger" />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            @*@Html.ActionLink("موافقه", "Assent", new { id = true }, new { @class = "btn btn-default" })
+                    @Html.ActionLink("رفض", "Assent", new { id = false }, new { @class = "btn btn-default" })*@
+
+                            <input type="submit" value="موافقه" name="submitButton" class="btn btn-outline-success" />
+                            <input type="submit" value="رفض" name="submitButton" class="btn btn-outline-danger" />
+                        
+                        </div>
                     </div>
+                                }
                 </div>
-            </div>
-
+                              
             <!-- /.card-body -->
         </div>
         <!-- /.card -->
@@ -166,10 +173,10 @@
 
 
 
-}
+                                }
 
 <div class="jumbotron">
-    @Html.ActionLink("Back to List", "Assent", new { @class = "btn btn-primary" })
+    @Html.ActionLink("الرجوع الى القائمة", "Assent", new { @class = "btn btn-primary" })
 </div>
 <style>
     respon {

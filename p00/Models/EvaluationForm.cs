@@ -13,7 +13,7 @@ namespace p00.Models
         public int id { get; set; }
         [Display(Name = "السنه")]
         public DateTime year { get; set; }
-        [Display(Name = "الفعاله")]
+        [Display(Name = "فعالة ؟")]
         public bool iscurent { get; set; }
         public ICollection<EvaluaationFormtoSections> EvaluaationFormtoSections { get; set; }
         public virtual ICollection<TopicEV> TopicEVs { get; set; }

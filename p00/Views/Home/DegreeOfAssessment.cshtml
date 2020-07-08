@@ -3,7 +3,7 @@
 @using WebApplication2.Models;
 
 @{
-    ViewBag.Title = "DegreeOfAssessment";
+    ViewBag.Title = "نتيجة التقييم";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
@@ -24,7 +24,7 @@
     double ave = 0;
     bool b = true;
     float f;
-    <h2>تاريخ تفعيل الاستماره @CurrentEaf.year</h2>
+    <h2>تاريخ تفعيل الاستمارة @CurrentEaf.year</h2>
 
     foreach (var item in last)
     {
@@ -33,13 +33,13 @@
         <table class="table" border="1">
             <tr bgcolor="FFE16A">
                 <th>
-                    <h4>الفقره</h4>
+                    <h4>الفقرة</h4>
                 </th>
                 <th>
-                    <h4>الدرجه القصوى</h4>
+                    <h4>الدرجة القصوى</h4>
                 </th>
                 <th>
-                    <h4>الدرجه المعطاة</h4>
+                    <h4>الدرجة المعطاة</h4>
                 </th>
             </tr>
             @foreach (var item2 in Model)
@@ -61,7 +61,7 @@
                             }
                             else
                             {
-                                <h4>لما تتتقيم بعد</h4>
+                                <h4>لم تتقيم بعد</h4>
                             }
 
                         </td>
@@ -82,13 +82,13 @@
             <h4 >المحاور</h4>
         </th>
         <th>
-            <h4>الدرجه الحاصل عليها من المحور</h4>
+            <h4>الدرجة الحاصل عليها من المحور</h4>
         </th>
         <th>
             <h4>وزن المحور</h4>
         </th>
         <th>
-            <h4>الدرجه حسب الوزن</h4>
+            <h4>الدرجة حسب الوزن</h4>
         </th>
     </tr>
     @foreach (var item in last)
@@ -145,7 +145,7 @@
                 }
                 else
                 {
-                    <h5>لم يكتمل تقيم المحور</h5>
+                    <h5>لم يكتمل تقييم المحور</h5>
                 }
             </th>
         </tr>
@@ -153,10 +153,10 @@
     }
     <tr>
         <td rowspan="2">
-            <h4>مجموع الدرجات النهائية للتقيم</h4>
+            <h4>مجموع الدرجات النهائية للتقييم</h4>
         </td>
         <td colspan="3">
-            <h4>مجموع الدرجه رقما </h4>
+            <h4>مجموع الدرجة رقماً </h4>
         </td>
     </tr>
     <tr>

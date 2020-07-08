@@ -3,7 +3,7 @@
 @using p00.Models;
 @using WebApplication2.Models;
 @{
-    ViewBag.Title = "NotificationView";
+    ViewBag.Title = "الاشعارات";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }@if (Request.IsAuthenticated)
 {
@@ -13,7 +13,7 @@
     var c2 = db.CommHees.ToList();
     var c3 = db.CommitHees.ToList();
     <h2>الاشعارات</h2>
-    <a href="NotificationView2"> <input type="submit" value="تم قراءة الكل" class="btn btn-default" /></a>
+    <a href="NotificationView2"> <input type="submit" value="تم قراءة الكل" class="btn btn-danger" /></a>
    
     <table class="table" width="1000" border="1">
         <tr>
@@ -28,8 +28,8 @@
 
 
             var tea = c.Where(a => a.Teacherid == itme.AccountontID).SingleOrDefault();
-            var tc = c2.Where(a => a.id == tea.CommHeeid).SingleOrDefault();
-            var tr = c3.Where(a => a.id == tc.CommitHeesid).SingleOrDefault();
+          
+            var tr = c3.Where(a => a.id == tea.CommitHeesid).SingleOrDefault();
             if (itme.issee == false)
             {
                 <tr id="row"><td><label id="Notification"><p> موضوع @itme.Messagee من @tr.comitname</p> الوقت @itme.AddedOn</label></td></tr>

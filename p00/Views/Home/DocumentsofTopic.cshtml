@@ -29,7 +29,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Sections.SectionName)
                 </th>
-              
+
                 <th>
                     @Html.DisplayNameFor(model => model.Topics.TopicName)
                 </th>
@@ -40,42 +40,36 @@
             {
                 if (CurrentTeacher.TeacherID == item.TeacherId)
                 {
+                    if (item.Topics.ReqDoc == true)
+                    {
 
+                        <tr>
 
-                    <tr>
-
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Sections.SectionName)
-                        </td>
-                      
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Topics.TopicName)
-                        </td>
-                        @if (item.Topics.ReqDoc == true )
-                        {
-                    <td>
-                        @if (item.Document.Count() != 0)
-                        {
-                        <button class="btn btn-outline-success" role="button">@Html.ActionLink("عرض الوثائق", "EditDocumentOfTopic", new { id = item.Id })</button>
-                        }
-
-
-                        <button class="btn btn-outline-success" role="button">@Html.ActionLink("اضافة وثيقه", "Create", new { id = item.Id })</button>
-
-
-                    </td>
-                        }
-                        else
-                        {
                             <td>
-                                <h5>لاتحتاج وثيقه</h5>
+                                @Html.DisplayFor(modelItem => item.Sections.SectionName)
                             </td>
-                        }
-                    </tr>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Topics.TopicName)
+                            </td>
+
+                            <td>
+                                @if (item.Document.Count() != 0)
+                                {
+                                    <button class="btn btn-outline-success" role="button">@Html.ActionLink("عرض الوثائق", "EditDocumentOfTopic", new { id = item.Id })</button>
+                                }
+
+
+                                <button class="btn btn-outline-success" role="button">@Html.ActionLink("اضافة وثيقه", "Create", new { id = item.Id })</button>
+
+
+                            </td>
+
+                        </tr>
+                    }
                 }
             }
-
-        </table>
+            </table>
         </form>
         </div>
         }

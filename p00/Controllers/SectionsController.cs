@@ -35,7 +35,7 @@ namespace p00.Controllers
             {
                 return HttpNotFound();
             }
-            var R = from b in db.Topics
+            var R = from b in db.Topics where b.isActivate==false
                     select new
                     {
                         b.Id,
@@ -100,7 +100,7 @@ namespace p00.Controllers
             {
                 return HttpNotFound();
             }
-            var R=from b in db.Topics
+            var R=from b in db.Topics where b.isActivate==false
                 select new
                 {
                     b.Id,

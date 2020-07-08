@@ -14,22 +14,10 @@
 <div class="row">
     <div class="col-12">
         <div class="card">
-            <div class="card-header bg-warning">
-                <h3 class="card-title "> محاور استمارة التقييم</h3>
-
-                <div class="card-tools">
-                    <div class="input-group input-group-sm" style="width: 150px;">
-                        <input type="text" name="table_search" class="form-control float-right" placeholder="بحث">
-
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          
             <!-- /.card-header -->
             <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap">
+                <table id="example1" class="table table-hover text-nowrap">
                     <thead>
                         <tr class="bg-warning">
                             <th>
@@ -60,7 +48,7 @@
                             <td>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-success" onclick="PopupForm('@Url.Action("edit","sections",new { id = item.Id })')"> تعديل واضافة الفقرات</button>
-                                    <button type="button" class="btn btn-light"> @Html.ActionLink("حذف", "Delete", new { id = item.Id })</button>
+                                   @Html.ActionLink("حذف", "Delete", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-danger" })
 
                                 </div>
 

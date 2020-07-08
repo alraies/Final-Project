@@ -131,8 +131,8 @@ namespace WebApplication2.Controllers
                     var document = db.Documents.Where(a=>a.TopicEVId==topicEV.Id);
                     topicEV.Nameproved = teacher.FullName;
                     var Currentcommit = db.CommHeeMembers.Where(a => a.Teacherid == CurrentTeacher.TeacherID).SingleOrDefault();
-                    var Currentcommit2 = db.CommHees.Where(a => a.id == Currentcommit.CommitHeesid).SingleOrDefault();
-                    var Currentcommit3 = db.CommitHees.Where(a => a.id == Currentcommit2.CommitHeesid).SingleOrDefault();
+                 
+                    var Currentcommit3 = db.CommitHees.Where(a => a.id == Currentcommit.CommitHeesid).SingleOrDefault();
                     if (document!= null)
                     {
                         topicEV.Points = (document.Count()*topics.DocPoints);
@@ -145,7 +145,7 @@ namespace WebApplication2.Controllers
                     WebMail.EnableSsl = true;
                     WebMail.UserName="UOB.cs.com@gmail.com";
                     WebMail.Password = "UOB.cs.com";
-                    string s = " تم التقييم والموافقة الموافقه  على فقرة " + topics.TopicName + " \n من قبل " + Currentcommit3.comitname + "";
+                    string s = " تم التقييم والموافقة   على فقرة " + topics.TopicName + " \n من قبل " + Currentcommit3.comitname + "";
                     db.Notifications.Add(new Notification { RecipientID = topicEV.TeacherId, AccountontID = teacher.Id, Messagee = s, AddedOn = DateTime.Now });
                     db.Entry(topicEV).State = EntityState.Modified;
                     db.SaveChanges();
@@ -164,13 +164,13 @@ namespace WebApplication2.Controllers
                     var CurrentTeacher = db.UserToTeachers.Where(a => a.UserID == UserID).SingleOrDefault();
                     var teacher = db.Teachers.Find(CurrentTeacher.TeacherID);
                     var Currentcommit = db.CommHeeMembers.Where(a => a.Teacherid == CurrentTeacher.TeacherID).SingleOrDefault();
-                    var Currentcommit2 = db.CommHees.Where(a => a.id == Currentcommit.CommitHeesid).SingleOrDefault();
-                    var Currentcommit3 = db.CommitHees.Where(a => a.id == Currentcommit2.CommitHeesid).SingleOrDefault();
+                   
+                    var Currentcommit3 = db.CommitHees.Where(a => a.id == Currentcommit.CommitHeesid).SingleOrDefault();
                     var topics = db.Topics.Find(topicEV.TopicsId);
                     topicEV.Nameproved = teacher.FullName;
                     topicEV.Approved = true;
                     topicEV.Points = 0;
-                    string s2 = "تم رفض فقرة " + topics.TopicName + " من قبل " + Currentcommit3.comitname + " ذا يوجود اعتراض يرجاء مرجعة المعلومات";
+                    string s2 = "تم رفض فقرة " + topics.TopicName + " من قبل " + Currentcommit3.comitname + " اذا يوجود اعتراض يرجى مراجعة المعلومات";
 
                     db.Notifications.Add(new Notification { RecipientID = topicEV.TeacherId, AccountontID = teacher.Id, Messagee =s2, AddedOn = DateTime.Now });
                     db.Entry(topicEV).State = EntityState.Modified;
@@ -182,9 +182,9 @@ namespace WebApplication2.Controllers
                     WebMail.UserName = "UOB.cs.com@gmail.com";
                     WebMail.Password = "UOB.cs.com";
                     var CurrentTeacher2 = db.UserToTeachers.Where(a => a.TeacherID == topicEV.TeacherId).SingleOrDefault();
-                    string s = " تم ارفض فقرت " + topics.TopicName + " من قبل " + Currentcommit3.comitname + " وفي حالة الارفض الفقره تعطي درجة صفر ذا هناك اعتراض يرجاء مرجعة الموقع";
+                    string s = "تم رفض فقرة " + topics.TopicName + " من قبل " + Currentcommit3.comitname + " وفي حالة رفض الفقره تعطى درجة صفر اذا هناك اعتراض يرجلى مراجعة الموقع";
                     SendNotification(topicEV, teacher.Id);
-                    WebMail.Send(to: CurrentTeacher2.User.Email, subject: "تقييم الاساتذه", body: s, isBodyHtml: true);
+                    WebMail.Send(to: CurrentTeacher2.User.Email, subject: "تقييم الاساتذة", body: s, isBodyHtml: true);
                     return RedirectToAction("Assent");
                 }
                 }

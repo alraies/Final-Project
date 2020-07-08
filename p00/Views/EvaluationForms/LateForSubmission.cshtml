@@ -1,63 +1,86 @@
 ﻿@model IEnumerable<p00.Models.Teacher>
 
 @{
-    ViewBag.Title = "LateForSubmission";
+    ViewBag.Title = "المتأخرين";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<h1>الاساتذه المتاخرين عن التقديم لتقييم</h1>
-@Html.ActionLink("اضافه الكل لتقييم", "AllRequestForEvaluation", new { teachers = Model.ToList() })
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FullName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.University)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.College)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Department)
-        <th>
-            @Html.DisplayNameFor(model => model.ScientificTitle)
-        </th>
-        <th></th>
-    </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.University)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.College)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Department)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ScientificTitle)
-            </td>
-            <td>
-                |
-                @Html.ActionLink("اضافه لتقييم", "RequestForEvaluation", new { id = item.Id }) |
+@Html.ActionLink("اضافة الكل للتقييم", "AllRequestForEvaluation", new { teachers = Model.ToList() },htmlAttributes: new {@class="btn btn-primary" })
+    <div style=" margin: 0 auto; /* Added */
+        float: none; /* Added */
+        margin-bottom: 10px; /* Added */" class="col-10 card card-primary col-xs-10  ">
 
-            </td>
-        </tr>
-    }
+        <!-- /.card-header -->
+        <!-- form start -->
 
-</table>
-@if (ViewBag.Message != null)
-{
-    <script type="text/javascript">
+        <div class="col-12">
+            <div class="card card-warning">
+                <div>
+
+
+
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0 ">
+                    <table id="example1" class="table table-bordered table-hover table-warning">
+                        <thead>
+                            <tr class="bg-warning">
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FullName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.University)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.College)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Department)
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ScientificTitle)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FullName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.University)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.College)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Department)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ScientificTitle)
+                                    </td>
+                                    <td>
+                                   
+                                        @Html.ActionLink("اضافة للتقييم", "RequestForEvaluation", new { id = item.Id },htmlAttributes: new { @class="btn btn-primary"}) 
+
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+            </div>
+        </div>
+
+                @if (ViewBag.Message != null)
+                {
+                    <script type="text/javascript">
         window.onload = function () {
             alert("@ViewBag.Message");
         };
-    </script>
-}
+                    </script>
+                }

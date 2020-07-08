@@ -8,7 +8,7 @@
     <h2>@ViewBag.Title</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <button class="btn btn-outline-success">  @Html.ActionLink("اضافة", "Create")</button>
 </p>
 <div>
     <div>
@@ -18,7 +18,7 @@
         <div>
             <table id="example1" class="table table-bordered table-hover">
                 <thead>
-                    <tr class="bg-info">
+                    <tr class="bg-warning">
                         <th>
                             @Html.DisplayNameFor(model => model.CommitHees.comitname)
                         </th>
@@ -41,9 +41,9 @@
                             </td>
                            
                             <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                @Html.ActionLink("تعديل", "Edit", new { id = item.Id },htmlAttributes: new { @class="btn btn-primary"}) |
+                                
+                                @Html.ActionLink("حذف", "Delete", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-danger" })
                             </td>
                         </tr>
                     }

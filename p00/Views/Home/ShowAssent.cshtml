@@ -3,22 +3,22 @@
 @using WebApplication2.Models;
 
 @{
-    ViewBag.Title = "ShowAssent";
+    ViewBag.Title = "رؤية النتائج";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<h2>ShowAssent</h2>
+<h2>رؤية النتائج</h2>
 
 <div>
-    <h4>Teacher</h4>
+    <h4>الاستاذ</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal card">
         <dt>
             @Html.DisplayNameFor(model => model.FullName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FullName)
+            <h3> @Html.DisplayFor(model => model.FullName)</h3> 
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Email)
@@ -52,7 +52,7 @@
 
         <h2>محور @item.Sections.SectionName</h2>
         <table class="table" border="1">
-            <tr>
+            <tr class="bg-warning">
                 <th>
                     <h4>الفقره</h4>
                 </th>
@@ -68,7 +68,7 @@
 
                 if (item.SectionsID == item2.SectionsId && item2.TeacherId == Model.Id)
                 {
-                    <tr>
+                    <tr >
                         <td>
                             @item2.Topics.TopicName
                         </td>
@@ -98,7 +98,7 @@
     }
 
     <table class="table" border="2">
-        <tr>
+        <tr class="bg-warning">
             <th>
                 <h4>المحاور</h4>
             </th>
@@ -177,7 +177,7 @@
             <td rowspan="2">
                 <h4>مجموع الدرجات النهائية للتقيم</h4>
             </td>
-            <td colspan="3">
+            <td  class="bg-success" colspan="3">
                 <h4>مجموع الدرجه رقما </h4>
             </td>
         </tr>
@@ -189,6 +189,6 @@
     </table>
 }
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    
+    @Html.ActionLink("الرجوع الى القائمة", "Index")
 </p>

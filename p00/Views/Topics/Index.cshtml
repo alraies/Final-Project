@@ -11,112 +11,127 @@
 <div style=" margin: 0 auto; /* Added */
         float: none; /* Added */
         margin-bottom: 10px; /* Added */" class="col-10 card card-primary col-xs-10  ">
-    
+
     <!-- /.card-header -->
     <!-- form start -->
-    <form role="form">
-        <table id="example1" class="table table-bordered table-hover table-warning">
-            <tr class="bg-warning">
 
-                <th>
-                    @Html.DisplayNameFor(model => model.TopicName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.TotalPoints)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ReqDoc)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DocPoints)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CommitHees.comitname)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.isActivate)
-                </th>
-                <th></th>
-            </tr>
+    <div class="col-12">
+        <div class="card card-warning">
+            <div>
+             
 
-            @foreach (var item in Model)
-            {
-        <tr>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.TopicName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalPoints)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReqDoc)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DocPoints)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CommitHees.comitname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.isActivate)
-            </td>
-            <td>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-success" onclick="PopupForm('@Url.Action("edit","Topics",new { id = item.Id })')"> تعديل</button>
-                    <button type="button" class="btn btn-danger"> @Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0 ">
+                <table id="example1" class="table table-bordered table-hover ">
+                    <thead>
+                       
+                        <tr class="bg-warning">
 
-                </div>
-            </td>
-        </tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TopicName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Description)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TotalPoints)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ReqDoc)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DocPoints)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CommitHees.comitname)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.isActivate)
+                            </th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="bg-gradient-light">
 
-            }
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TopicName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TotalPoints)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ReqDoc)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DocPoints)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CommitHees.comitname)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.isActivate)
+                                </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-success" onclick="PopupForm('@Url.Action("edit","Topics",new { id = item.Id })')"> تعديل</button>
+                                        @Html.ActionLink("حذف", "Delete", new { id = item.Id },htmlAttributes:new {@class="btn btn-danger" })
 
-        </table>
-        </form>
-</div>
-        @if (ViewBag.Message != null)
-        {
-            <script type="text/javascript">
+                                    </div>
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            
+            </div>
+        </div>
+    </div>
+
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
         window.onload = function () {
             alert("@ViewBag.Message");
         };
-            </script>
+        </script>
+    }
+
+
+    <script>
+        var Popup;
+
+
+        function PopupForm(url) {
+            var formDiv = $('<div/>');
+            $.get(url)
+                .done(function (response) {
+                    formDiv.html(response);
+
+                    Popup = formDiv.dialog({
+                        autoOpen: true,
+                        resizable: false,
+
+                        height: 700,
+                        width: 700,
+
+
+                        close: function () {
+
+                            Popup.dialog('destroy').remove();
+                        }
+
+                    });
+                });
         }
 
 
-        <script>
-            var Popup;
-
-
-            function PopupForm(url) {
-                var formDiv = $('<div/>');
-                $.get(url)
-                    .done(function (response) {
-                        formDiv.html(response);
-
-                        Popup = formDiv.dialog({
-                            autoOpen: true,
-                            resizable: false,
-
-                            height: 700,
-                            width: 700,
-
-
-                            close: function () {
-
-                                Popup.dialog('destroy').remove();
-                            }
-
-                        });
-                    });
-            }
-
-
-        </script>
+    </script>
